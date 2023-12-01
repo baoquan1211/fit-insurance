@@ -16,7 +16,7 @@ const loginSchema = z.object({
   }),
 });
 
-function Login() {
+function LoginPage() {
   const auth = useAuth();
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -91,4 +91,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

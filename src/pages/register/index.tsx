@@ -1,7 +1,7 @@
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
 import { LoginResquest } from "@/services/auth";
-import { Suspense, useRef } from "react";
+import { useRef } from "react";
 import { z } from "zod";
 import { Link } from "react-router-dom";
 
@@ -49,54 +49,51 @@ function RegisterPage() {
   };
 
   return (
-    <Suspense fallback={<>Loading</>}>
-      <main
-        onSubmit={loginHandle}
-        className="bg-gray-100 flex justify-center py-16"
-      >
-        <section className="bg-background h-fit p-12 rounded-xl flex flex-col gap-1 md:min-w-[500px]">
-          <h1 className="text-xl font-semibold">Đăng ký tài khoản</h1>
-          <h2 className="text-sm">
-            Xin vui lòng điền các trường thông tin chính xác nhất để mở tài
-            khoản
-          </h2>
-          <form className="flex flex-col gap-3 mt-6">
-            <InputField
-              placeholder="Họ và tên"
-              label="Họ và tên"
-              name={"name"}
-              inputRef={nameRef}
-            />
-            <InputField
-              placeholder="Email"
-              label="Email đăng ký tài khoản"
-              name={"email"}
-              inputRef={emailRef}
-            />
-            <InputField
-              placeholder="Mật khẩu"
-              label="Mặt khẩu tài khoản"
-              name={"password"}
-              inputRef={passwordRef}
-            />
-            <InputField
-              placeholder="Xác nhận lại mật khẩu"
-              label="Xác nhận lại mật khẩu"
-              name={"confirmPassword"}
-              inputRef={confirmPasswordRef}
-            />
-            <span className="text-xs">
-              Đã có tài khoản. Vui lòng{" "}
-              <Link to="/login" className="text-primary">
-                tại đây
-              </Link>
-              .
-            </span>
-            <Button className="self-end">Đăng nhập</Button>
-          </form>
-        </section>
-      </main>
-    </Suspense>
+    <main
+      onSubmit={loginHandle}
+      className="bg-gray-100 flex justify-center py-16"
+    >
+      <section className="bg-background h-fit p-12 rounded-xl flex flex-col gap-1 md:min-w-[500px]">
+        <h1 className="text-xl font-semibold">Đăng ký tài khoản</h1>
+        <h2 className="text-sm">
+          Xin vui lòng điền các trường thông tin chính xác nhất để mở tài khoản
+        </h2>
+        <form className="flex flex-col gap-3 mt-6">
+          <InputField
+            placeholder="Họ và tên"
+            label="Họ và tên"
+            name={"name"}
+            inputRef={nameRef}
+          />
+          <InputField
+            placeholder="Email"
+            label="Email đăng ký tài khoản"
+            name={"email"}
+            inputRef={emailRef}
+          />
+          <InputField
+            placeholder="Mật khẩu"
+            label="Mặt khẩu tài khoản"
+            name={"password"}
+            inputRef={passwordRef}
+          />
+          <InputField
+            placeholder="Xác nhận lại mật khẩu"
+            label="Xác nhận lại mật khẩu"
+            name={"confirmPassword"}
+            inputRef={confirmPasswordRef}
+          />
+          <span className="text-xs">
+            Đã có tài khoản. Vui lòng{" "}
+            <Link to="/login" className="text-primary">
+              tại đây
+            </Link>
+            .
+          </span>
+          <Button className="self-end">Đăng nhập</Button>
+        </form>
+      </section>
+    </main>
   );
 }
 
