@@ -38,13 +38,12 @@ const responsive = {
 
 function BannerCarousel() {
   return (
-    <section className="relative">
+    <section className="relative flex flex-col">
       <Carousel
         infinite
         draggable={false}
         responsive={responsive}
         showDots={true}
-        autoPlay
       >
         {banner.map((bannerItem) => (
           <Banner

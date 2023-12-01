@@ -18,8 +18,10 @@ const product = [
 function ProductShow() {
   return (
     <section className="w-full mt-96 lg:mt-36 items-center flex flex-col px-4 lg:px-0">
-      <h1 className="text-3xl font-bold">{"Các sản phẩm bảo hiểm"}</h1>{" "}
-      <div className="flex gap-x-8 mt-10">
+      <h1 className="text-2xl w-full md:text-center text-start md:text-3xl font-bold">
+        {"Các sản phẩm bảo hiểm"}
+      </h1>{" "}
+      <div className="flex md:flex-row flex-col gap-8 mt-10">
         {product.map((productItem) => (
           <ProductCard
             key={productItem.name}

@@ -16,12 +16,12 @@ const slogan = [
 function BannerSlogan() {
   return (
     <div className="absolute flex px-6 lg:px-14 py-10 items-center justify-center rounded-3xl bg-primary-foreground gap-6 bottom-0 translate-y-[100%] lg:translate-y-1/2 left-1/2 -translate-x-1/2 flex-col w-[95%] lg:w-fit lg:flex-row drop-shadow-xl">
-      <h1 className="text-2xl font-bold min-w-fit font-inter">
+      <h1 className="text-2xl font-bold min-w-fit font-inter w-full lg:text-center lg:w-fit">
         {"Ưu điểm nổi bật"}
       </h1>
       {slogan.map((sloganItem, index) => (
         <div
-          className="flex flex-row lg:flex-col w-full lg:w-[243px] items-center lg:items-start gap-x-2"
+          className="flex flex-row lg:flex-col w-full lg:w-[250px] items-center md:items-start gap-x-4"
           key={index}
         >
           <div className="bg-primary/10 rounded-full p-3 stroke-primary w-fit h-fit">
@@ -46,8 +46,10 @@ function BannerSlogan() {
               ></path>
             </svg>
           </div>
-          <h1 className="font-semibold lg:mt-3">{sloganItem.title}</h1>
-          <h2 className="lg:mt-1">{sloganItem.detail}</h2>
+          <div className="flex flex-col">
+            <h1 className="font-semibold lg:mt-3">{sloganItem.title}</h1>
+            <h2 className="lg:mt-1">{sloganItem.detail}</h2>
+          </div>
         </div>
       ))}
     </div>

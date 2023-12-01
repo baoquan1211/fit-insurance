@@ -8,7 +8,7 @@ interface IProductCard {
 
 function ProductCard({ name, detail, imageSrc }: IProductCard) {
   return (
-    <div className="max-w-[330px] rounded-2xl drop-shadow-lg bg-primary-foreground">
+    <div className="w-full md:max-w-[330px] rounded-2xl drop-shadow-lg bg-primary-foreground">
       <img src={imageSrc} alt="product-card" className="w-full rounded-t-2xl" />
       <div className="flex flex-col px-6 py-4 gap-2">
         <h1 className="font-bold">{name}</h1>
