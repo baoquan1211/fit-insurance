@@ -1,7 +1,7 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Banner from "./Banner";
-import BannerSlogan from "./BannerSlogan";
+import Banner from "./banner";
+import BannerSlogan from "./banner-slogan";
 
 const banner = [
   {
@@ -14,11 +14,11 @@ const banner = [
     titleColor: "black",
     bannerSrc: "./banner-2.png",
   },
-  {
-    title: "Bảo hiểm ô tô toàn diện chỉ từ 1.200đ/ngày",
-    titleColor: "white",
-    bannerSrc: "./banner-3.png",
-  },
+  // {
+  //   title: "Bảo hiểm ô tô toàn diện chỉ từ 1.200đ/ngày",
+  //   titleColor: "white",
+  //   bannerSrc: "./banner-3.png",
+  // },
 ];
 
 const responsive = {
@@ -44,6 +44,7 @@ function BannerCarousel() {
         draggable={false}
         responsive={responsive}
         showDots={true}
+        autoPlay
       >
         {banner.map((bannerItem) => (
           <Banner

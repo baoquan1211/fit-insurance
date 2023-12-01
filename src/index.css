@@ -3,8 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+html,
+body,
+:root {
+  height: 100%;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 @layer base {

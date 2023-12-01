@@ -1,4 +1,4 @@
-import ProductCard from "./ProductCard";
+import ProductCard from "./product-card";
 
 const product = [
   {
@@ -17,7 +17,10 @@ const product = [
 
 function ProductShow() {
   return (
-    <section className="w-full mt-96 lg:mt-36 items-center flex flex-col px-4 lg:px-0">
+    <section
+      className="w-full mt-80 pt-16 lg:mt-36 items-center flex flex-col px-4 lg:px-0"
+      id="landing-page-product-show"
+    >
       <h1 className="text-2xl w-full md:text-center text-start md:text-3xl font-bold">
         {"Các sản phẩm bảo hiểm"}
       </h1>{" "}
