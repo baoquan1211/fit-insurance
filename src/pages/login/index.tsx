@@ -39,9 +39,7 @@ function LoginPage() {
           password: passwordRef.current.value as string,
         })
         .then((data: LoginResquest) => {
-          dispatch(loginAction(data)).then((data) => {
-            console.log(data);
-          });
+          dispatch(loginAction(data));
         })
         .catch((err: string) => {
           const error: ZodError[] = JSON.parse(err);
@@ -73,6 +71,7 @@ function LoginPage() {
             placeholder="Mật khẩu"
             label="Mặt khẩu tài khoản"
             name={"password"}
+            type="password"
             inputRef={passwordRef}
           />
           <span className="text-xs">

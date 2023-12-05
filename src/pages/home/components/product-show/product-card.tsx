@@ -4,16 +4,22 @@ interface IProductCard {
   name: string;
   detail: string;
   imageSrc: string;
+  isActive?: boolean;
 }
 
-function ProductCard({ name, detail, imageSrc }: IProductCard) {
+function ProductCard({
+  name,
+  detail,
+  imageSrc,
+  isActive = true,
+}: IProductCard) {
   return (
     <div className="w-full md:max-w-[330px] rounded-2xl drop-shadow-lg bg-primary-foreground">
       <img src={imageSrc} alt="product-card" className="w-full rounded-t-2xl" />
       <div className="flex flex-col px-6 py-4 gap-2">
         <h1 className="font-bold">{name}</h1>
         <p>{detail}</p>
-        <button className="flex justify-between mt-2 font-semibold">
+        <button className="flex justify-between mt-2 font-semibold items-center">
           {"Xem ưu điểm sản phẩm"}
           <svg
             viewBox="0 0 24 24"
@@ -31,7 +37,7 @@ function ProductCard({ name, detail, imageSrc }: IProductCard) {
             ></path>
           </svg>
         </button>
-        <Button>{"Mua ngay"}</Button>
+        <Button disabled={!isActive}>{"Mua ngay"}</Button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
+import { useAuth } from "@/hooks/auth-hooks";
 import axios, { AxiosResponse } from "axios";
-// import { store } from "@/redux/store";
-// import { refreshAction } from "@/redux/actions/authAction";
+
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}/api/v1`,
   headers: {
@@ -8,10 +8,22 @@ const instance = axios.create({
   },
 });
 
-export interface ErrorResponse {
+export interface DataResponse {
   message?: string;
   status: number;
+  data?: unknown;
 }
+
+axios.interceptors.request.use(
+  function (config) {
+    const auth = useAuth();
+    config.headers.Authorization = "Bearer " + auth.access;
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
 instance.interceptors.response.use(
   function (response) {
@@ -30,16 +42,17 @@ instance.interceptors.response.use(
     const { response, config } = error;
     if (
       (response.status === 401 || response.status === 403) &&
-      response.data.code === "token_not_valid" &&
       config.url !== "/refresh" &&
       config.url !== "/login" &&
-      config.url !== "/logout"
+      config.url !== "/logout" &&
+      config.url !== "/register" &&
+      config.url !== "/change-password"
     ) {
       console.log("REFRESHING TOKEN");
       //   store.dispatch(refreshAction());
     } else {
-      const response: ErrorResponse = {
-        message: error.response.data,
+      const response: DataResponse = {
+        message: error.response.data.error,
         status: error.response.status,
       };
       return response;

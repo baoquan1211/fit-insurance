@@ -45,7 +45,7 @@ const authSlice = createSlice({
     builder.addCase(logoutAction.fulfilled, (state) => {
       state.access = null;
       state.message = null;
-      state.status = "success";
+      state.status = "idle";
       state.refresh = null;
       state.email = null;
     });

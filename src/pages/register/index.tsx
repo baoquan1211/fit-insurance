@@ -1,9 +1,13 @@
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
-import { LoginResquest } from "@/services/auth";
+import { RegisterResquest } from "@/services/auth";
 import { useRef } from "react";
-import { z } from "zod";
-import { Link } from "react-router-dom";
+import { ZodError, z } from "zod";
+import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { register } from "@/services/auth";
+import { DataResponse } from "@/services";
 
 const registerSchema = z
   .object({
@@ -25,6 +29,12 @@ function RegisterPage() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
+  const { mutateAsync, isPending } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: (data: RegisterResquest) => register(data),
+  });
+  const { toast } = useToast();
 
   const loginHandle = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -41,10 +51,37 @@ function RegisterPage() {
           password: passwordRef.current.value as string,
           confirmPassword: confirmPasswordRef.current.value as string,
         })
-        .then((data: LoginResquest) => {
-          console.log(data);
+        .then((data) => {
+          if (!isPending)
+            mutateAsync(data).then((res: DataResponse) => {
+              if (res.status >= 400) {
+                toast({
+                  variant: "destructive",
+                  title: "Có lỗi xảy ra!",
+                  description:
+                    res.message == "The email is existed"
+                      ? "Email đã tồn tại. Vui lòng điền email khác."
+                      : res.message,
+                });
+                return;
+              }
+              if (res.status === 201) {
+                toast({
+                  title: "Đăng ký thành công",
+                  description: "Vui lòng tiến hành đăng nhập",
+                });
+                navigate("/login");
+              }
+            });
         })
-        .catch((e) => console.log(JSON.parse(e)));
+        .catch((err: string) => {
+          const error: ZodError[] = JSON.parse(err);
+          toast({
+            variant: "destructive",
+            title: "Có lỗi xảy ra!",
+            description: error[0].message,
+          });
+        });
     }
   };
 
@@ -75,12 +112,14 @@ function RegisterPage() {
             placeholder="Mật khẩu"
             label="Mặt khẩu tài khoản"
             name={"password"}
+            type="password"
             inputRef={passwordRef}
           />
           <InputField
             placeholder="Xác nhận lại mật khẩu"
             label="Xác nhận lại mật khẩu"
             name={"confirmPassword"}
+            type="password"
             inputRef={confirmPasswordRef}
           />
           <span className="text-xs">
@@ -90,7 +129,9 @@ function RegisterPage() {
             </Link>
             .
           </span>
-          <Button className="self-end">Đăng nhập</Button>
+          <Button type="submit" disabled={isPending} className="self-end">
+            Đăng nhập
+          </Button>
         </form>
       </section>
     </main>

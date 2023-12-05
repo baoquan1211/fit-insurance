@@ -1,5 +1,4 @@
 import axios from "@/services";
-// import { store } from "@/redux/store";
 
 export interface LoginResquest {
   email: string;
@@ -23,16 +22,14 @@ export interface RefreshTokenSuccess {
   access: string;
 }
 
-const refresh = () => {
-  //   const refreshToken = store.getState().auth.refresh;
+const refresh = (refreshToken: string) => {
   return axios.post<RefreshTokenSuccess>("/refresh", {
-    refresh: "refreshToken",
+    refresh: refreshToken,
   });
 };
 
-const logout = () => {
-  //   const refreshToken = store.getState().auth.refresh;
-  return axios.post("/logout", { refresh: "refreshToken" });
+const logout = (refreshToken: string) => {
+  return axios.post("/logout", { refresh: refreshToken });
 };
 
 export interface RegisterResquest {
@@ -42,7 +39,7 @@ export interface RegisterResquest {
 }
 
 const register = (data: RegisterResquest) => {
-  return axios.post<RegisterResquest>("/v1/users", data);
+  return axios.post<RegisterResquest>("/register", data);
 };
 
 export { login, refresh, logout, register };
