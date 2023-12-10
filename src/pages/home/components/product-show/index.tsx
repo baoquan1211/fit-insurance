@@ -3,16 +3,18 @@ import ProductCard from "./product-card";
 const product = [
   {
     name: "Bảo hiểm sức khỏe",
+    slug: "suc-khoe",
     detail:
       "Giải pháp bảo vệ sức khoẻ ưu việt cho gia đình bạn sống vui khoẻ và an tâm tận hưởng cuộc sống",
-    image: "./banner-2.png",
+    image: "/banner-2.png",
     isActive: true,
   },
   {
     name: "Bảo hiểm ô tô",
+    slug: "o-to",
     detail:
       "Giải pháp bảo vệ toàn diện giúp bảo vệ bản thân và tài sản trước những rủi ro trên mọi hành trình của bạn",
-    image: "./banner-4.png",
+    image: "/banner-4.png",
     isActive: false,
   },
 ];
@@ -31,6 +33,7 @@ function ProductShow() {
           <ProductCard
             key={productItem.name}
             name={productItem.name}
+            slug={productItem.slug}
             detail={productItem.detail}
             imageSrc={productItem.image}
             isActive={productItem.isActive}

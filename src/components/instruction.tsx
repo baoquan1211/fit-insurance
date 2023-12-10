@@ -9,7 +9,7 @@ const instructionStep = [
 
 function Instruction() {
   return (
-    <section className="mt-24 items-center justify-center py-12 w-full bg-primary-foreground hidden md:flex px-6">
+    <section className="py-24 items-center justify-center w-full bg-primary-foreground hidden md:flex px-6">
       <div className="max-w-3xl">
         <h1 className="text-3xl font-semibold">
           Mua bảo hiểm trực tuyến dễ dàng với 4 bước
@@ -32,7 +32,7 @@ function Instruction() {
         </div>
       </div>
       <img
-        src="./instruction-banner.png"
+        src="/instruction-banner.png"
         alt="instruction-banner"
         className="h-[300px]"
       />

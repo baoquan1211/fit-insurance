@@ -1,13 +1,13 @@
 import { Input } from "./ui/input";
-import { useId } from "react";
+import React, { useId } from "react";
 
-export interface InputFieldProps {
+type InputFieldProps = {
   label?: string;
   placeholder?: string;
   type?: string;
   name?: string;
   inputRef?: React.ForwardedRef<HTMLInputElement>;
-}
+};
 
 function InputField({
   label,
@@ -21,7 +21,10 @@ function InputField({
   return (
     <div>
       {label ? (
-        <label htmlFor={id} className="text-sm font-normal text-slate-600 mb-1">
+        <label
+          htmlFor={id}
+          className="text-sm font-medium text-secondary-foreground/80 mb-1"
+        >
           {label}
         </label>
       ) : null}
@@ -37,4 +40,4 @@ function InputField({
   );
 }
 
-export default InputField;
+export default React.memo(InputField);

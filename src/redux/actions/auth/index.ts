@@ -18,9 +18,9 @@ export const loginAction = createAsyncThunk(
 
 export const logoutAction = createAsyncThunk(
   "auth/logout",
-  async (_varibles, thunkAPI) => {
+  async ({ refreshToken }: { refreshToken: string }, thunkAPI) => {
     try {
-      const response = await logout();
+      const response = await logout(refreshToken);
       if (response.status == 401 || response.status == 403)
         return thunkAPI.rejectWithValue(response.data);
       return response;
@@ -32,9 +32,9 @@ export const logoutAction = createAsyncThunk(
 
 export const refreshAction = createAsyncThunk(
   "auth/refresh",
-  async (_varibles, thunkAPI) => {
+  async ({ refreshToken }: { refreshToken: string }, thunkAPI) => {
     try {
-      const response = await refresh();
+      const response = await refresh(refreshToken);
       if (response.status >= 400) {
         return thunkAPI.rejectWithValue(response);
       }

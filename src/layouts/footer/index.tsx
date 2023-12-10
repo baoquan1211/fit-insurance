@@ -1,5 +1,6 @@
 import FACEBOOK_SVG from "@/assets/svg/facebook.svg";
 import LINKEDIN_SVG from "@/assets/svg/linkedin.svg";
+import { Link } from "react-router-dom";
 
 type Media = {
   name: string;
@@ -26,9 +27,12 @@ function Footer() {
       className="items-center w-full py-6 justify-center flex flex-col xl:px-0 px-6 bg-background"
     >
       <div className="max-w-3xl xl:max-w-5xl w-full justify-center flex flex-col py-2 border-b-2">
-        <h1 className="font-extrabold text-3xl text-primary select-none">
+        <Link
+          to="/"
+          className="font-extrabold text-3xl text-primary select-none"
+        >
           fit<span className="text-foreground/95">@insurance</span>
-        </h1>
+        </Link>
         <div className="flex justify-between w-full flex-col md:flex-row mt-6 gap-2">
           <div className="flex flex-col">
             <h1 className="font-bold text-base">{"Liên hệ"}</h1>

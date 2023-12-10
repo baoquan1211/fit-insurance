@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { useAuth } from "@/hooks/auth-hooks";
 import { useNavigate } from "react-router-dom";
+import { DataResponse } from "@/services";
+
 const loginSchema = z.object({
   email: z.string().email({ message: "Email không hợp lệ" }),
   password: z.string().min(6, {
@@ -39,7 +41,20 @@ function LoginPage() {
           password: passwordRef.current.value as string,
         })
         .then((data: LoginResquest) => {
-          dispatch(loginAction(data));
+          dispatch(loginAction(data)).then((res) => {
+            const data = res.payload as DataResponse;
+            if (data.status >= 400) {
+              toast({
+                variant: "destructive",
+                title: "Có lỗi xảy ra!",
+                description:
+                  data.message == "The email is existed"
+                    ? "Email đã tồn tại. Vui lòng điền email khác."
+                    : data.message,
+              });
+              return;
+            }
+          });
         })
         .catch((err: string) => {
           const error: ZodError[] = JSON.parse(err);

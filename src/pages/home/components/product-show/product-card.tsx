@@ -1,18 +1,21 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
-interface IProductCard {
+type ProductCardProps = {
   name: string;
   detail: string;
+  slug: string;
   imageSrc: string;
   isActive?: boolean;
-}
+};
 
 function ProductCard({
   name,
   detail,
+  slug,
   imageSrc,
   isActive = true,
-}: IProductCard) {
+}: ProductCardProps) {
   return (
     <div className="w-full md:max-w-[330px] rounded-2xl drop-shadow-lg bg-primary-foreground">
       <img src={imageSrc} alt="product-card" className="w-full rounded-t-2xl" />
@@ -37,7 +40,14 @@ function ProductCard({
             ></path>
           </svg>
         </button>
-        <Button disabled={!isActive}>{"Mua ngay"}</Button>
+        <Button disabled={!isActive} className="p-0">
+          <Link
+            className="w-full h-full flex items-center justify-center"
+            to={`baohiem/${slug}`}
+          >
+            {"Mua ngay"}
+          </Link>
+        </Button>
       </div>
     </div>
   );

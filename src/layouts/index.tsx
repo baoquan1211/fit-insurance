@@ -10,10 +10,16 @@ function RootLayout() {
   const auth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const WHITE_LIST: string[] = ["/login", "/register", "/"];
+  const WHITE_LIST: string[] = ["/login", "/register", "/baohiem"];
 
   useEffect(() => {
-    if (!WHITE_LIST.includes(location.pathname)) {
+    if (
+      !WHITE_LIST.reduce(
+        (state, current) => state || location.pathname.startsWith(current),
+        false
+      ) &&
+      location.pathname != "/"
+    ) {
       if (auth.access && auth.refresh && auth.status == "success") return;
       navigate("/login");
     }

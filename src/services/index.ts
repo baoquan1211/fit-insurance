@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     const res = {
       data: response.data,
       status: response.status,
-    } as AxiosResponse<unknown, unknown>;
+    } as AxiosResponse<DataResponse, unknown>;
     return res;
   },
   function (error) {

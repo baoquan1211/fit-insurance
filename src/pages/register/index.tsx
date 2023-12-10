@@ -32,7 +32,9 @@ function RegisterPage() {
   const navigate = useNavigate();
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ["register"],
-    mutationFn: (data: RegisterResquest) => register(data),
+    mutationFn: (data: RegisterResquest) => {
+      return register(data);
+    },
   });
   const { toast } = useToast();
 
@@ -130,7 +132,7 @@ function RegisterPage() {
             .
           </span>
           <Button type="submit" disabled={isPending} className="self-end">
-            Đăng nhập
+            Đăng ký
           </Button>
         </form>
       </section>

@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <header
-      className="h-20 w-full flex items-center justify-between md:px-8 px-3 bg-primary-foreground font-sans overflow-hidden"
+      className="h-[72px] w-full flex items-center justify-between md:px-8 px-3 bg-white font-sans overflow-hidden"
       id="header"
     >
       <Link

@@ -11,7 +11,7 @@ export interface LoginSuccess {
 }
 
 const login = (data: LoginResquest) => {
-  return axios.post<LoginSuccess>("/login", data);
+  return axios.post("/login", data);
 };
 
 export interface RefreshTokenRequest {
@@ -23,7 +23,7 @@ export interface RefreshTokenSuccess {
 }
 
 const refresh = (refreshToken: string) => {
-  return axios.post<RefreshTokenSuccess>("/refresh", {
+  return axios.post("/refresh", {
     refresh: refreshToken,
   });
 };

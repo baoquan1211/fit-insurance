@@ -7,18 +7,13 @@ const banner = [
   {
     title: "Mua bảo hiểm online tại FIT thật dễ dàng chỉ với vài thao tác",
     titleColor: "white",
-    bannerSrc: "./banner-1.png",
+    bannerSrc: "/banner-1.png",
   },
   {
     title: "Bảo hiểm sức khoẻ ưu việt chỉ từ 3.000đ/ngày",
     titleColor: "black",
-    bannerSrc: "./banner-2.png",
+    bannerSrc: "/banner-2.png",
   },
-  // {
-  //   title: "Bảo hiểm ô tô toàn diện chỉ từ 1.200đ/ngày",
-  //   titleColor: "white",
-  //   bannerSrc: "./banner-3.png",
-  // },
 ];
 
 const responsive = {
@@ -38,7 +33,7 @@ const responsive = {
 
 function BannerCarousel() {
   return (
-    <section className="relative flex flex-col">
+    <section className="relative flex flex-col w-screen">
       <Carousel
         infinite
         draggable={false}
@@ -52,6 +47,7 @@ function BannerCarousel() {
             bannerSrc={bannerItem.bannerSrc}
             title={bannerItem.title}
             titleColor={bannerItem.titleColor}
+            button="Tìm hiểu ngay"
           />
         ))}
       </Carousel>
