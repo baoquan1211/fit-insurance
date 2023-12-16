@@ -90,13 +90,13 @@ function RegisterPage() {
   return (
     <main
       onSubmit={loginHandle}
-      className="bg-gray-100 flex justify-center py-16"
+      className="bg-gray-100 h-[calc(100dvh-72px)] flex justify-center py-16"
     >
       <section className="bg-background h-fit p-12 rounded-xl flex flex-col gap-1 md:min-w-[500px]">
-        <h1 className="text-xl font-semibold">Đăng ký tài khoản</h1>
-        <h2 className="text-sm">
+        <h2 className="text-xl font-semibold">Đăng ký tài khoản</h2>
+        <h3 className="text-sm">
           Xin vui lòng điền các trường thông tin chính xác nhất để mở tài khoản
-        </h2>
+        </h3>
         <form className="flex flex-col gap-3 mt-6">
           <InputField
             placeholder="Họ và tên"

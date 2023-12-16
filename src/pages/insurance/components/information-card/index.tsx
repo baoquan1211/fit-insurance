@@ -11,14 +11,14 @@ type InformationCardProps = {
 function InformationCard({ informations, title }: InformationCardProps) {
   return (
     <div className="flex px-6 lg:px-14 py-10 items-start justify-start rounded-3xl bg-primary-foreground gap-6 flex-col xl:w-[1048px] w-[95dvw] lg:flex-row drop-shadow-xl">
-      <h1 className="font-semibold text-xl md:text-3xl text-start">{title}</h1>
+      <h2 className="font-semibold text-xl md:text-3xl text-start">{title}</h2>
       <div className="flex flex-col gap-6">
         {informations.map((condition, index) => (
           <div className="flex flex-col gap-3" key={index}>
             {condition.title && (
-              <h2 className="text-base md:text-xl font-semibold">
+              <h3 className="text-base md:text-xl font-semibold">
                 {condition.title}
-              </h2>
+              </h3>
             )}
             {condition.item.map((i, index) => (
               <div className="flex gap-2" key={index}>

@@ -20,7 +20,7 @@ function ProductCard({
     <div className="w-full md:max-w-[330px] rounded-2xl drop-shadow-lg bg-primary-foreground">
       <img src={imageSrc} alt="product-card" className="w-full rounded-t-2xl" />
       <div className="flex flex-col px-6 py-4 gap-2">
-        <h1 className="font-bold">{name}</h1>
+        <h4 className="font-bold">{name}</h4>
         <p>{detail}</p>
         <button className="flex justify-between mt-2 font-semibold items-center">
           {"Xem ưu điểm sản phẩm"}

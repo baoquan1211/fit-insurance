@@ -6,14 +6,15 @@ import {
 import UserAvatar from "./user-avatar";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/auth-hooks";
+import { useAuth } from "@/hooks/auth.hook";
 import { LogOut } from "lucide-react";
-import { logoutAction } from "@/redux/actions/auth";
-import { useAppDispatch } from "@/hooks/redux-hooks";
+import { logoutAction } from "@/stores/actions/auth";
+import { useAppDispatch } from "@/hooks/redux.hook";
 
 function UserDropDownMenu() {
   const auth = useAuth();
   const dispatch = useAppDispatch();
+
   return (
     <>
       <HoverCard openDelay={100}>
@@ -29,7 +30,8 @@ function UserDropDownMenu() {
             variant={"ghost"}
             className="text-primary hover:text-primary text-lg justify-between"
             onClick={() => {
-              dispatch(logoutAction());
+              if (auth.refresh !== null)
+                dispatch(logoutAction({ refreshToken: auth.refresh }));
             }}
           >
             Đăng xuất <LogOut />

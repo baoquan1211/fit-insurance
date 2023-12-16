@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/auth-hooks";
+import { useAuth } from "@/hooks/auth.hook";
 import UserDropDownMenu from "./components/user-drowdown-menu";
 
 function Header() {

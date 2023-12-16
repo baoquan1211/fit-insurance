@@ -11,9 +11,9 @@ function Instruction() {
   return (
     <section className="py-24 items-center justify-center w-full bg-primary-foreground hidden md:flex px-6">
       <div className="max-w-3xl">
-        <h1 className="text-3xl font-semibold">
+        <h2 className="text-3xl font-semibold">
           Mua bảo hiểm trực tuyến dễ dàng với 4 bước
-        </h1>
+        </h2>
 
         <div className="flex flex-col gap-y-3 mt-6">
           {instructionStep.map((step, index) => (

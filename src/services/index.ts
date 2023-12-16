@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/auth-hooks";
+import { useAuth, useLogout, useRefresh } from "@/hooks/auth.hook";
 import axios, { AxiosResponse } from "axios";
 
 const instance = axios.create({
@@ -14,7 +14,7 @@ export interface DataResponse {
   data?: unknown;
 }
 
-axios.interceptors.request.use(
+instance.interceptors.request.use(
   function (config) {
     const auth = useAuth();
     config.headers.Authorization = "Bearer " + auth.access;
@@ -39,18 +39,25 @@ instance.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     //return Promise.reject(error);
+
     const { response, config } = error;
     if (
-      (response.status === 401 || response.status === 403) &&
+      response.status === 401 &&
       config.url !== "/refresh" &&
       config.url !== "/login" &&
       config.url !== "/logout" &&
       config.url !== "/register" &&
       config.url !== "/change-password"
     ) {
-      console.log("REFRESHING TOKEN");
-      //   store.dispatch(refreshAction());
+      {
+        console.log("REFRESHING TOKEN");
+        useRefresh();
+      }
     } else {
+      if (config.url === "/refresh") {
+        useLogout();
+      }
+
       const response: DataResponse = {
         message: error.response.data.error,
         status: error.response.status,

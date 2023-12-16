@@ -3,11 +3,16 @@ import { Button } from "@/components/ui/button";
 type BannerProps = {
   bannerSrc: string;
   title: string;
-  titleColor: string;
+  titleColor?: string;
   button: string;
 };
 
-function Banner({ bannerSrc, title, titleColor, button }: BannerProps) {
+function Banner({
+  bannerSrc,
+  title,
+  titleColor = "white",
+  button,
+}: BannerProps) {
   return (
     <div className="md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[100vh] relative md:flex flex-col">
       <img src={bannerSrc} alt="banner" className="w-full h-full" />
@@ -19,7 +24,7 @@ function Banner({ bannerSrc, title, titleColor, button }: BannerProps) {
         >
           {title}
         </span>
-        <a href={"#landing-page-product-show"}>
+        <a href={"#insurances"}>
           <Button
             variant={titleColor === "white" ? "secondary" : "default"}
             className="w-fit font-semibold md:block hidden"

@@ -1,27 +1,25 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RootLayout from "./layouts";
 import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
+import { store, persistor } from "./stores";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ErrorBoundary } from "react-error-boundary";
+
 import LoadingPage from "./components/loading-page";
+import ErrorPage from "./components/error-page";
+import FooterLayout from "./layouts/footer-layout";
 
 const HomePage = React.lazy(() => import("./pages/home"));
 const LoginPage = React.lazy(() => import("./pages/login"));
 const RegisterPage = React.lazy(() => import("./pages/register"));
-const ProductPage = React.lazy(() => import("./pages/product"));
-import { useLayoutEffect } from "react";
+const InsurancePage = React.lazy(() => import("./pages/insurance"));
+const InsuranceDetailPage = React.lazy(
+  () => import("./pages/insurance-detail")
+);
 
 const queryClient = new QueryClient();
-
-const Wrapper = ({ children }: { children: React.ReactNode }) => {
-  const location = useLocation();
-  useLayoutEffect(() => {
-    document.documentElement.scrollTo(0, 0);
-  }, [location.pathname]);
-  return children;
-};
 
 function App() {
   return (
@@ -30,21 +28,28 @@ function App() {
         <PersistGate loading={null} persistor={persistor}>
           <QueryClientProvider client={queryClient}>
             <BrowserRouter>
-              <Wrapper>
+              <ErrorBoundary fallback={<ErrorPage />}>
                 <Suspense fallback={<LoadingPage />}>
                   <Routes>
                     <Route path="/" element={<RootLayout />}>
-                      <Route path="" element={<HomePage />} />
-                      <Route path="login" element={<LoginPage />} />
                       <Route path="register" element={<RegisterPage />} />
+                      <Route path="login" element={<LoginPage />} />
                       <Route
-                        path="baohiem/:product"
-                        element={<ProductPage />}
+                        path="baohiem/chi-tiet/:id"
+                        element={<InsuranceDetailPage />}
                       />
+                      <Route element={<FooterLayout />}>
+                        <Route path="" element={<HomePage />} />
+                        <Route
+                          path="baohiem/:slug"
+                          element={<InsurancePage />}
+                        />
+                      </Route>
+                      <Route path="*" element={<ErrorPage />} />
                     </Route>
                   </Routes>
                 </Suspense>
-              </Wrapper>
+              </ErrorBoundary>
             </BrowserRouter>
           </QueryClientProvider>
         </PersistGate>

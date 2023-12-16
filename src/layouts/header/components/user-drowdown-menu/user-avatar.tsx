@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/auth-hooks";
+import { useAuth } from "@/hooks/auth.hook";
 
 function UserAvatar() {
   const auth = useAuth();

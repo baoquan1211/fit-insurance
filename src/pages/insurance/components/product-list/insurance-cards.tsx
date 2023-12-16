@@ -12,13 +12,14 @@ import {
 import InsuranceFeeForm from "./insurance-fee-form";
 
 type InsuranceCard = {
+  id: number;
   name: string;
   logoUrl: string;
   fee: number;
   benefit: number;
 };
 
-function InsuranceCard({ name, benefit, logoUrl, fee }: InsuranceCard) {
+function InsuranceCard({ id, name, benefit, logoUrl, fee }: InsuranceCard) {
   return (
     <div className="w-[95%] sm:w-[333px] p-6 bg-primary-foreground h-fit gap-6 flex flex-col rounded-xl drop-shadow-md">
       <div className="flex justify-between">
@@ -43,7 +44,7 @@ function InsuranceCard({ name, benefit, logoUrl, fee }: InsuranceCard) {
                 chính xác
               </SheetDescription>
             </SheetHeader>
-            <InsuranceFeeForm insurance={name} />
+            <InsuranceFeeForm insuranceId={id} />
           </SheetContent>
         </Sheet>
       </div>

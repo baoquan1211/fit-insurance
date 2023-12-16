@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginAction, logoutAction, refreshAction } from "@/redux/actions/auth";
+import {
+  loginAction,
+  logoutAction,
+  refreshAction,
+} from "@/stores/actions/auth";
 import { jwtDecode } from "jwt-decode";
+
 export type authSlideType = {
   status: "loading" | "idle" | "error" | "success";
   access: string | null;

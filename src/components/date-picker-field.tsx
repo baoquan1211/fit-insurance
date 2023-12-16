@@ -12,24 +12,26 @@ import {
 } from "@/components/ui/popover";
 
 type DatePickerFieldProps = {
+  defaultDate?: Date;
   label: string;
-  onChange: React.Dispatch<React.SetStateAction<string | undefined>>;
+  onChange?: React.Dispatch<React.SetStateAction<string | undefined>>;
   fromYear?: number;
   toYear?: number;
 };
 
 function DatePickerField({
+  defaultDate,
   label,
   onChange,
   fromYear,
   toYear,
 }: DatePickerFieldProps) {
-  const [date, setDate] = React.useState<Date>();
-
+  const [date, setDate] = React.useState<Date | undefined>(defaultDate);
   const minYear = React.useMemo(() => {
     const today = new Date();
     return (today.getFullYear() - 19) as number;
   }, []);
+
   return (
     <div className="flex flex-col">
       {label ? (
@@ -56,7 +58,10 @@ function DatePickerField({
             selected={date}
             onSelect={(date) => {
               setDate(date);
-              onChange(format(date as Date, "dd/MM/yyyy"));
+              if (onChange)
+                if (date) {
+                  onChange(format(date as Date, "yyyy-MM-dd"));
+                } else onChange(undefined);
             }}
             toYear={toYear ? toYear : minYear}
             fromYear={fromYear}

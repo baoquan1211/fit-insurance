@@ -35,7 +35,7 @@ function Footer() {
         </Link>
         <div className="flex justify-between w-full flex-col md:flex-row mt-6 gap-2">
           <div className="flex flex-col">
-            <h1 className="font-bold text-base">{"Liên hệ"}</h1>
+            <h4 className="font-bold text-base">{"Liên hệ"}</h4>
             <p className="text-slate-600 mt-1">{"Khoa hệ thống thông tin"}</p>
             <p className="text-slate-600">
               {"Địa chỉ: 227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.Hồ Chí Minh"}
@@ -45,7 +45,7 @@ function Footer() {
             </p>
           </div>
           <div className="flex flex-col gap-1">
-            <h1 className="font-bold text-base mb-1">{"Mạng xã hội"}</h1>
+            <h4 className="font-bold text-base mb-1">{"Mạng xã hội"}</h4>
             {medias.map((media) => (
               <div key={media.name} className="flex gap-2 flex-row">
                 <a href={media.link}>
@@ -57,9 +57,9 @@ function Footer() {
           </div>
         </div>
       </div>
-      <h1 className="mt-6 text-slate-600">
+      <div className="mt-6 text-slate-600">
         {"© Copyright 2023. Made by quan-qb"}
-      </h1>
+      </div>
     </footer>
   );
 }

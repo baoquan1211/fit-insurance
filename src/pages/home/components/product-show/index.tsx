@@ -1,42 +1,35 @@
 import ProductCard from "./product-card";
+import useInsuranceType from "../../hooks/useInsuranceType";
 
-const product = [
-  {
-    name: "Bảo hiểm sức khỏe",
-    slug: "suc-khoe",
-    detail:
-      "Giải pháp bảo vệ sức khoẻ ưu việt cho gia đình bạn sống vui khoẻ và an tâm tận hưởng cuộc sống",
-    image: "/banner-2.png",
-    isActive: true,
-  },
-  {
-    name: "Bảo hiểm ô tô",
-    slug: "o-to",
-    detail:
-      "Giải pháp bảo vệ toàn diện giúp bảo vệ bản thân và tài sản trước những rủi ro trên mọi hành trình của bạn",
-    image: "/banner-4.png",
-    isActive: false,
-  },
-];
+export type InsuranceType = {
+  name: string;
+  slug: string;
+  description: string;
+  image: string;
+  active: boolean;
+  insurances?: [];
+};
 
 function ProductShow() {
+  const { data } = useInsuranceType();
+
   return (
     <section
       className="w-full mt-80 pt-16 mb-8 lg:mt-36 items-center flex flex-col px-4 lg:px-0"
-      id="landing-page-product-show"
+      id="insurances"
     >
-      <h1 className="text-2xl w-full md:text-center text-start md:text-3xl font-bold">
+      <h2 className="text-2xl w-full md:text-center text-start md:text-3xl font-bold">
         {"Các sản phẩm bảo hiểm"}
-      </h1>{" "}
+      </h2>
       <div className="flex md:flex-row flex-col gap-8 mt-10">
-        {product.map((productItem) => (
+        {data?.map((productItem: InsuranceType) => (
           <ProductCard
-            key={productItem.name}
+            key={productItem.slug}
             name={productItem.name}
             slug={productItem.slug}
-            detail={productItem.detail}
+            detail={productItem.description}
             imageSrc={productItem.image}
-            isActive={productItem.isActive}
+            isActive={productItem.active}
           />
         ))}
       </div>

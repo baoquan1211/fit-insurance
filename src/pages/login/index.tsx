@@ -1,13 +1,13 @@
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
-import { loginAction } from "@/redux/actions/auth";
+import { loginAction } from "@/stores/actions/auth";
 import { LoginResquest } from "@/services/auth";
 import { useRef, useEffect } from "react";
-import { useAppDispatch } from "@/hooks/redux-hooks";
+import { useAppDispatch } from "@/hooks/redux.hook";
 import { ZodError, z } from "zod";
 import { Link } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from "@/hooks/auth-hooks";
+import { useAuth } from "@/hooks/auth.hook";
 import { useNavigate } from "react-router-dom";
 import { DataResponse } from "@/services";
 
@@ -43,14 +43,20 @@ function LoginPage() {
         .then((data: LoginResquest) => {
           dispatch(loginAction(data)).then((res) => {
             const data = res.payload as DataResponse;
-            if (data.status >= 400) {
+
+            if (data.status && data.status >= 400) {
               toast({
                 variant: "destructive",
                 title: "Có lỗi xảy ra!",
                 description:
-                  data.message == "The email is existed"
-                    ? "Email đã tồn tại. Vui lòng điền email khác."
-                    : data.message,
+                  "Thông tin đăng nhập không chính xác hoặc chưa tồn tại.",
+              });
+              return;
+            } else {
+              toast({
+                variant: "destructive",
+                title: "Có lỗi xảy ra!",
+                description: "Không thể kết nối với máy chủ.",
               });
               return;
             }
@@ -70,11 +76,11 @@ function LoginPage() {
   return (
     <main
       onSubmit={loginHandle}
-      className="bg-gray-100 flex justify-center py-16"
+      className="bg-gray-100 h-[calc(100dvh-72px)] flex justify-center py-16"
     >
-      <section className="bg-background h-fit p-12 rounded-xl flex flex-col gap-1 md:min-w-[500px]">
-        <h1 className="text-xl font-semibold">Đăng nhập</h1>
-        <h2 className="text-sm">Cung cấp thông tin cần thiết để đăng nhập</h2>
+      <section className="bg-background h-fit p-16 rounded-xl flex flex-col gap-1 md:min-w-[500px]">
+        <h2 className="text-xl font-semibold">Đăng nhập</h2>
+        <h3 className="text-sm">Cung cấp thông tin cần thiết để đăng nhập</h3>
         <form className="flex flex-col gap-3 mt-6">
           <InputField
             placeholder="Email"
