@@ -1,7 +1,5 @@
 import DatePickerField from "@/components/date-picker-field";
-import SelectionField, {
-  type SelectItemType,
-} from "@/components/selection-field";
+import SelectionField, { type SelectItem } from "@/components/selection-field";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/components/ui/use-toast";
@@ -9,7 +7,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const insuranceOwners: SelectItemType[] = [
+const insuranceOwners: SelectItem[] = [
   {
     name: "Bản thân",
     value: "self",
@@ -20,7 +18,7 @@ const insuranceOwners: SelectItemType[] = [
   },
 ];
 
-export type InsuranceFeeStateType = {
+export type InsuranceRegistrationState = {
   insuranceId: number;
   gender: string;
   insuranceOwner: string;
@@ -32,9 +30,10 @@ function InsuranceFeeForm({ insuranceId }: { insuranceId: number }) {
   const [gender, setGender] = useState<"male" | "female" | null>();
   const [insuranceOwner, setInsuranceOwner] = useState<string | undefined>();
   const today = new Date();
+  const tommorrow = new Date(+new Date() + 86400000);
   const [birthdate, setBirthdate] = useState<string | undefined>();
   const [startDate, setStartDate] = useState<string | undefined>(
-    format(today, "yyyy-MM-dd")
+    format(tommorrow, "yyyy-MM-dd"),
   );
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -64,10 +63,10 @@ function InsuranceFeeForm({ insuranceId }: { insuranceId: number }) {
             insuranceOwner,
             birthdate,
             startDate,
-          } as InsuranceFeeStateType,
+          } as InsuranceRegistrationState,
         });
       }}
-      className="flex flex-col gap-6 mt-6"
+      className="mt-6 flex flex-col gap-6"
     >
       <SelectionField
         placeholder="Chọn"
@@ -82,34 +81,38 @@ function InsuranceFeeForm({ insuranceId }: { insuranceId: number }) {
         toYear={today.getFullYear() - 7}
       />
       <div className="flex flex-col">
-        <label className="text-sm font-medium text-secondary-foreground/80 mb-1">
+        <label className="mb-1 text-sm font-medium text-secondary-foreground/80">
           Giới tính
         </label>
         <div className="flex gap-6">
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <Checkbox
               className="rounded-full"
               checked={gender === "male"}
               onClick={() => setGender("male")}
+              id="male-check-box"
             />
-            <span>Nam</span>
+            <label htmlFor="male-check-box">Nam</label>
           </div>
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <Checkbox
               className="rounded-full"
               checked={gender === "female"}
               onClick={() => setGender("female")}
+              id="female-check-box"
             />
-            <span>Nữ</span>
+            <label htmlFor="female-check-box">Nữ</label>
           </div>
         </div>
       </div>
       <DatePickerField
         label={"Ngày hiệu lực bảo hiểm"}
         onChange={setStartDate}
-        fromYear={today.getFullYear()}
-        toYear={today.getFullYear() + 1}
-        defaultDate={today}
+        fromYear={tommorrow.getFullYear()}
+        toYear={tommorrow.getFullYear() + 1}
+        toDate={new Date(+tommorrow + 86400000 * 29)}
+        fromDate={tommorrow}
+        defaultDate={tommorrow}
       />
       <Button className="w-fit self-end">Tính phí</Button>
     </form>

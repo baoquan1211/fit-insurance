@@ -21,17 +21,17 @@ type InsuranceCard = {
 
 function InsuranceCard({ id, name, benefit, logoUrl, fee }: InsuranceCard) {
   return (
-    <div className="w-[95%] sm:w-[333px] p-6 bg-primary-foreground h-fit gap-6 flex flex-col rounded-xl drop-shadow-md">
+    <div className="flex h-fit w-[95%] flex-col gap-6 rounded-xl bg-primary-foreground p-6 drop-shadow-md sm:w-[333px]">
       <div className="flex justify-between">
         <div className="flex items-center gap-1">
           <img src={logoUrl} alt="logo" />
-          <span className="font-bold text-lg">{name}</span>
+          <span className="text-lg font-bold">{name}</span>
         </div>
         <Sheet>
           <SheetTrigger asChild>
             <Link
               to={"#"}
-              className="flex gap-1 font-semibold text-primary items-center justify-center"
+              className="flex items-center justify-center gap-1 font-semibold text-primary"
             >
               {"Chi tiết"} <ChevronRight size={16} />
             </Link>
@@ -49,17 +49,17 @@ function InsuranceCard({ id, name, benefit, logoUrl, fee }: InsuranceCard) {
         </Sheet>
       </div>
       <div className="flex justify-between">
-        <div className="text-slate-600 font-light text-sm">
+        <div className="text-sm font-light text-slate-600">
           {"Quyền lợi chính"}
         </div>
-        <div className="font-semibold text-base">
+        <div className="text-base font-semibold">
           {numberToCurrency(benefit)}
           {"đ"}
         </div>
       </div>
       <div className="flex justify-between">
-        <div className="text-slate-600 font-light text-sm">{"Phí"}</div>
-        <div className="font-semibold text-base">
+        <div className="text-sm font-light text-slate-600">{"Phí"}</div>
+        <div className="text-base font-semibold">
           {"Từ "}
           {numberToCurrency(fee)}
           {"đ/năm"}

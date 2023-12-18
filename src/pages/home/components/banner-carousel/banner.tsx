@@ -14,11 +14,11 @@ function Banner({
   button,
 }: BannerProps) {
   return (
-    <div className="md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[100vh] relative md:flex flex-col">
-      <img src={bannerSrc} alt="banner" className="w-full h-full" />
-      <div className="md:absolute top-[50%] md:-translate-y-1/2 left-[17%] flex flex-col gap-y-6 md:gap-y-12 w-full md:w-fit text-black py-10 px-6">
+    <div className="relative flex-col md:flex md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[100vh]">
+      <img src={bannerSrc} alt="banner" className="h-full w-full" />
+      <div className="left-[17%] top-[50%] flex w-full flex-col gap-y-6 px-6 py-10 text-black md:absolute md:w-fit md:-translate-y-1/2 md:gap-y-12">
         <span
-          className={`z-20 font-bold text-2xl md:text-3xl xl:text-5xl break-words ${
+          className={`z-20 break-words text-2xl font-bold md:text-3xl xl:text-5xl ${
             titleColor === "white" ? "md:text-white" : "md:text-black"
           } md:max-w-[45%]`}
         >
@@ -27,12 +27,12 @@ function Banner({
         <a href={"#insurances"}>
           <Button
             variant={titleColor === "white" ? "secondary" : "default"}
-            className="w-fit font-semibold md:block hidden"
+            className="hidden w-fit px-12 font-semibold md:block"
             size={"lg"}
           >
             {button}
           </Button>
-          <Button className="w-full font-semibold md:hidden block" size={"lg"}>
+          <Button className="block w-full font-semibold md:hidden" size={"lg"}>
             {button}
           </Button>
         </a>

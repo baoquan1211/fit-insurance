@@ -23,7 +23,7 @@ function InputField({
       {label ? (
         <label
           htmlFor={id}
-          className="text-sm font-medium text-secondary-foreground/80 mb-1"
+          className="mb-1 text-sm font-medium text-secondary-foreground/80"
         >
           {label}
         </label>

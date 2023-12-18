@@ -10,13 +10,18 @@ function RootLayout() {
   const auth = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const WHITE_LIST: string[] = ["/login", "/register", "/baohiem/"];
+  const WHITE_LIST: string[] = [
+    "/login",
+    "/register",
+    "/baohiem/",
+    "cau-hoi-suc-khoe",
+  ];
 
   useEffect(() => {
     if (
       !WHITE_LIST.reduce(
         (state, current) => state || location.pathname.startsWith(current),
-        false
+        false,
       ) &&
       location.pathname != "/"
     ) {

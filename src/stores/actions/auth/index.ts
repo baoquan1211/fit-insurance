@@ -13,7 +13,7 @@ export const loginAction = createAsyncThunk(
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
-  }
+  },
 );
 
 export const logoutAction = createAsyncThunk(
@@ -27,7 +27,7 @@ export const logoutAction = createAsyncThunk(
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
-  }
+  },
 );
 
 export const refreshAction = createAsyncThunk(
@@ -42,5 +42,5 @@ export const refreshAction = createAsyncThunk(
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
-  }
+  },
 );

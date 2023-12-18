@@ -10,17 +10,17 @@ type InformationCardProps = {
 
 function InformationCard({ informations, title }: InformationCardProps) {
   return (
-    <div className="flex px-6 lg:px-14 py-10 items-start justify-start rounded-3xl bg-primary-foreground gap-6 flex-col xl:w-[1048px] w-[95dvw] lg:flex-row drop-shadow-xl">
-      <h2 className="font-semibold text-xl md:text-3xl text-start">{title}</h2>
+    <div className="flex w-[95dvw] flex-col items-start justify-start gap-6 rounded-3xl bg-primary-foreground px-6 py-10 drop-shadow-xl lg:flex-row lg:px-14 xl:w-[1048px]">
+      <h2 className="text-start text-xl font-semibold md:text-3xl">{title}</h2>
       <div className="flex flex-col gap-6">
         {informations.map((condition, index) => (
           <div className="flex flex-col gap-3" key={index}>
             {condition.title && (
-              <h3 className="text-base md:text-xl font-semibold">
+              <h3 className="text-base font-semibold md:text-xl">
                 {condition.title}
               </h3>
             )}
-            {condition.item.map((i, index) => (
+            {condition.item.map((line, index) => (
               <div className="flex gap-2" key={index}>
                 <span className="text-primary">
                   <svg
@@ -31,7 +31,7 @@ function InformationCard({ informations, title }: InformationCardProps) {
                     height="1em"
                     fill="currentColor"
                     aria-hidden="true"
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                   >
                     <path
                       clipRule="evenodd"
@@ -45,7 +45,7 @@ function InformationCard({ informations, title }: InformationCardProps) {
                     ></path>
                   </svg>
                 </span>
-                <span>{i}</span>
+                <span>{line}</span>
               </div>
             ))}
           </div>

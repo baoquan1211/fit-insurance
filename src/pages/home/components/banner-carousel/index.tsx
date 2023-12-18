@@ -33,7 +33,7 @@ const responsive = {
 
 function BannerCarousel() {
   return (
-    <section className="relative flex flex-col w-screen">
+    <section className="relative flex w-screen flex-col">
       <Carousel
         infinite
         draggable={false}

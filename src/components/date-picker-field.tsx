@@ -17,6 +17,8 @@ type DatePickerFieldProps = {
   onChange?: React.Dispatch<React.SetStateAction<string | undefined>>;
   fromYear?: number;
   toYear?: number;
+  fromDate?: Date;
+  toDate?: Date;
 };
 
 function DatePickerField({
@@ -25,6 +27,8 @@ function DatePickerField({
   onChange,
   fromYear,
   toYear,
+  fromDate,
+  toDate,
 }: DatePickerFieldProps) {
   const [date, setDate] = React.useState<Date | undefined>(defaultDate);
   const minYear = React.useMemo(() => {
@@ -35,7 +39,7 @@ function DatePickerField({
   return (
     <div className="flex flex-col">
       {label ? (
-        <label className="text-sm font-medium text-secondary-foreground/80 mb-1">
+        <label className="mb-1 text-sm font-medium text-secondary-foreground/80">
           {label}
         </label>
       ) : null}
@@ -45,7 +49,7 @@ function DatePickerField({
             variant={"outline"}
             className={cn(
               "justify-start text-left font-normal",
-              !date && "text-muted-foreground"
+              !date && "text-muted-foreground",
             )}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
@@ -57,6 +61,11 @@ function DatePickerField({
             mode="single"
             selected={date}
             onSelect={(date) => {
+              console.log(date, fromDate);
+              if (fromDate && date && date <= new Date(+fromDate - 86400000)) {
+                return;
+              }
+
               setDate(date);
               if (onChange)
                 if (date) {
@@ -64,8 +73,22 @@ function DatePickerField({
                 } else onChange(undefined);
             }}
             toYear={toYear ? toYear : minYear}
+            fromDate={fromDate}
             fromYear={fromYear}
-            captionLayout="dropdown"
+            toDate={toDate}
+            captionLayout="dropdown-buttons"
+            modifiers={
+              fromDate && toDate
+                ? {
+                    disabled: [
+                      {
+                        before: fromDate,
+                        after: toDate,
+                      },
+                    ],
+                  }
+                : undefined
+            }
           />
         </PopoverContent>
       </Popover>

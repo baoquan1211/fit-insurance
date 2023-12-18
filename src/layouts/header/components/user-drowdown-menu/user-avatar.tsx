@@ -4,7 +4,7 @@ function UserAvatar() {
   const auth = useAuth();
 
   return (
-    <span className="w-10 h-10 rounded-full bg-gray-300 text-white flex items-center justify-center capitalize text-lg">
+    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-300 text-lg capitalize text-white">
       {auth?.email?.at(0)}
     </span>
   );

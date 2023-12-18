@@ -16,8 +16,9 @@ const LoginPage = React.lazy(() => import("./pages/login"));
 const RegisterPage = React.lazy(() => import("./pages/register"));
 const InsurancePage = React.lazy(() => import("./pages/insurance"));
 const InsuranceDetailPage = React.lazy(
-  () => import("./pages/insurance-detail")
+  () => import("./pages/insurance-detail"),
 );
+const HealthQuestionPage = React.lazy(() => import("./pages/health-question"));
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,10 @@ function App() {
                       <Route
                         path="baohiem/chi-tiet/:id"
                         element={<InsuranceDetailPage />}
+                      />
+                      <Route
+                        path="cau-hoi-suc-khoe"
+                        element={<HealthQuestionPage />}
                       />
                       <Route element={<FooterLayout />}>
                         <Route path="" element={<HomePage />} />

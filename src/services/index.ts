@@ -22,7 +22,7 @@ instance.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 
 instance.interceptors.response.use(
@@ -64,7 +64,7 @@ instance.interceptors.response.use(
       };
       return response;
     }
-  }
+  },
 );
 
 export default instance;

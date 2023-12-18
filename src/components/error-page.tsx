@@ -1,27 +1,27 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useLocation } from "react-router-dom";
 
 function ErrorPage() {
-  const navigate = useNavigate();
   const location = useLocation();
 
   return (
-    <main className="h-[calc(100dvh-72px)] absolute top-[72px] w-screen bg-gray-100 flex items-center justify-center text-center">
-      <section className="flex flex-col gap-4 items-center justify-center p-6">
+    <main className="absolute top-[72px] flex h-[calc(100dvh-72px)] w-screen items-center justify-center bg-gray-100 text-center">
+      <section className="flex flex-col items-center justify-center gap-4 p-6">
         <img src="/not-found.svg" alt="not-found" />
         {location.pathname !== "/" ? (
           <>
-            <h1 className="font-bold text-xl">Không tìm thấy trang này</h1>
+            <h1 className="text-xl font-bold">Không tìm thấy trang này</h1>
             <p className="text-slate-600">
               Rất tiếc, có thể trang này đã bị xoá hoặc đường dẫn URL sai. Vui
               lòng thử lại, hoặc liên hệ với chúng tôi để được trợ giúp.
             </p>
-            <Button onClick={() => navigate("/")}>Về trang chủ</Button>{" "}
+            <a href="/">
+              <Button>Về trang chủ</Button>
+            </a>
           </>
         ) : (
           <>
-            <h1 className="font-bold text-xl">
+            <h1 className="text-xl font-bold">
               Hệ thống hiện đang bảo trì. Vui lòng thử lại sau.
             </h1>
           </>

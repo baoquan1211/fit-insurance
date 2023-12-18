@@ -1,20 +1,20 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { numberToCurrency } from "@/lib/utils";
-import { calculateFee, findById } from "@/services/app/insurance";
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { Insurance } from "../insurance/components/product-list";
-import { DataResponse } from "@/services";
-import { InsuranceFeeStateType } from "../insurance/components/product-list/insurance-fee-form";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { InsuranceRegistrationState } from "../insurance/components/product-list/insurance-fee-form";
+import useFetchInsuranceById from "@/hooks/useFetchInsuranceById";
+import useCalculateFee from "@/hooks/useCalculateFee";
 
-export type BenefitType = {
+const ErrorPage = React.lazy(() => import("@/components/error-page"));
+
+export type Benefit = {
   title: string;
   unit: string;
   key: string;
 };
 
-const benefits: BenefitType[] = [
+const benefits: Benefit[] = [
   {
     title: "Tổng hạn mức chi trả",
     unit: "Số tiền/người/năm",
@@ -53,56 +53,45 @@ const benefits: BenefitType[] = [
 ];
 
 function InsuranceDetailPage() {
+  const navigate = useNavigate();
   const location = useLocation();
-  const feeCalculateState = location.state as InsuranceFeeStateType;
+  const feeCalculateState = location.state as InsuranceRegistrationState;
   const { id } = useParams();
 
-  const { data: insurance, error } = useQuery({
-    queryKey: ["insurances", id],
-    queryFn: async () => {
-      const response: DataResponse = await findById(Number(id));
-      if (response.status && response.status >= 400) {
-        return Promise.reject(response.message);
-      }
-      if (response.data) return response.data as Insurance;
-    },
-  });
+  const { data: insurance, error } = useFetchInsuranceById(Number(id));
 
-  const { data: fee } = useQuery({
-    queryKey: ["insurance-fee", id],
-    queryFn: async () => {
-      const response: DataResponse = await calculateFee(
-        Number(id),
-        feeCalculateState.birthdate,
-        feeCalculateState.startDate
-      );
-      if (response.status && response.status >= 400) {
-        return Promise.reject(response.message);
-      }
-      if (response.data) return response.data as number;
-    },
-  });
-  if (location.state === null) return null;
-  if (error) return null;
+  const { data: fee } = useCalculateFee(
+    Number(id),
+    feeCalculateState.birthdate,
+    feeCalculateState.startDate,
+  );
+
+  if (feeCalculateState === null || error) return <ErrorPage />;
+
   if (insurance && fee)
     return (
-      <main className="bg-background flex justify-center w-full p-3">
-        <section className="border-gray-300 border-[1px] flex flex-col w-full xl:w-[1024px]">
-          <div className="flex flex-col md:flex-row justify-between p-4">
-            <div className="flex gap-3 items-center justify-start">
-              <img
-                src="/silver-insurance.png"
-                alt="logo"
-                width={32}
-                height={32}
-              />
-              <span className="font-bold">Chương trình bảo hiểm Đồng</span>
+      <main className="flex w-full justify-center bg-background p-3">
+        <section className="flex w-full flex-col border-[1px] border-gray-300 xl:w-[1024px]">
+          <div className="flex flex-col justify-between p-4 md:flex-row">
+            <div className="flex items-center justify-start gap-3">
+              <img src={insurance.logo} alt="logo" width={32} height={32} />
+              <span className="font-bold">
+                Chương trình bảo hiểm {insurance.name}
+              </span>
             </div>
-            <div className="flex gap-6 items-center justify-between">
-              <span className="font-bold text-primary ml-11 md:ml-0">
+            <div className="flex items-center justify-between gap-6">
+              <span className="ml-11 font-bold text-primary md:ml-0">
                 {numberToCurrency(fee)}đ
               </span>
-              <Button size={"lg"} className="self-end">
+              <Button
+                onClick={() =>
+                  navigate("/cau-hoi-suc-khoe", {
+                    state: feeCalculateState,
+                  })
+                }
+                size={"lg"}
+                className="self-end"
+              >
                 Mua Ngay
               </Button>
             </div>
@@ -112,7 +101,7 @@ function InsuranceDetailPage() {
               {" "}
               <div className="bg-gray-100 p-4 font-[600]">
                 {benifit.title}{" "}
-                <span className="text-xs text-gray-600 font-[500]">
+                <span className="text-xs font-[500] text-gray-600">
                   ({benifit.unit})
                 </span>
               </div>

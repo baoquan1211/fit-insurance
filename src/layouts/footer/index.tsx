@@ -24,30 +24,30 @@ function Footer() {
   return (
     <footer
       id="footer"
-      className="items-center w-full py-6 justify-center flex flex-col xl:px-0 px-6 bg-background"
+      className="flex w-full flex-col items-center justify-center bg-background px-6 py-6 xl:px-0"
     >
-      <div className="max-w-3xl xl:max-w-5xl w-full justify-center flex flex-col py-2 border-b-2">
+      <div className="flex w-full max-w-3xl flex-col justify-center border-b-2 py-2 xl:max-w-5xl">
         <Link
           to="/"
-          className="font-extrabold text-3xl text-primary select-none"
+          className="select-none text-3xl font-extrabold text-primary"
         >
           fit<span className="text-foreground/95">@insurance</span>
         </Link>
-        <div className="flex justify-between w-full flex-col md:flex-row mt-6 gap-2">
+        <div className="mt-6 flex w-full flex-col justify-between gap-2 md:flex-row">
           <div className="flex flex-col">
-            <h4 className="font-bold text-base">{"Liên hệ"}</h4>
-            <p className="text-slate-600 mt-1">{"Khoa hệ thống thông tin"}</p>
+            <h4 className="text-base font-bold">{"Liên hệ"}</h4>
+            <p className="mt-1 text-slate-600">{"Khoa hệ thống thông tin"}</p>
             <p className="text-slate-600">
               {"Địa chỉ: 227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.Hồ Chí Minh"}
             </p>
-            <p className="text-slate-600 mt-2">
+            <p className="mt-2 text-slate-600">
               {"Email: info@fit.hcmus.edu.vn"}
             </p>
           </div>
           <div className="flex flex-col gap-1">
-            <h4 className="font-bold text-base mb-1">{"Mạng xã hội"}</h4>
+            <h4 className="mb-1 text-base font-bold">{"Mạng xã hội"}</h4>
             {medias.map((media) => (
-              <div key={media.name} className="flex gap-2 flex-row">
+              <div key={media.name} className="flex flex-row gap-2">
                 <a href={media.link}>
                   <img src={media.svg} alt="" />
                 </a>

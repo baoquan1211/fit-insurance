@@ -11,7 +11,7 @@ export const findById = (id: number) => {
 export const calculateFee = (
   id: number,
   birthdate: string,
-  startDate: string
+  startDate: string,
 ) => {
   return axios.post<DataResponse>(`/insurances/${id}/calculate-fee`, {
     birthdate,

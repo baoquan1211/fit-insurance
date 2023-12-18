@@ -8,12 +8,12 @@ function Header() {
 
   return (
     <header
-      className="h-[72px] w-full flex items-center justify-between md:px-8 px-3 bg-white font-sans overflow-hidden"
+      className="flex h-[72px] w-full items-center justify-between overflow-hidden bg-white px-3 font-sans md:px-8"
       id="header"
     >
       <Link
         to={"/"}
-        className="font-extrabold text-2xl md:text-3xl text-primary select-none"
+        className="select-none text-2xl font-extrabold text-primary md:text-3xl"
       >
         fit<span className="text-foreground/95">@insurance</span>
       </Link>
@@ -21,7 +21,7 @@ function Header() {
         <Link to={"/login"}>
           <Button
             variant={"outline"}
-            className="text-primary border-[1px] border-primary hover:text-primary"
+            className="border-[1px] border-primary text-primary hover:text-primary"
           >
             {"Đăng nhập/Đăng ký"}
           </Button>

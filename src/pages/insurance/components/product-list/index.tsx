@@ -23,14 +23,14 @@ export interface Insurance extends Record<string, any> {
 function ProductList({ insurances }: { insurances: Insurance[] }) {
   return (
     <section
-      className="bg-gray-100 flex flex-col items-center justify-center py-14 px-6"
+      className="flex flex-col items-center justify-center bg-gray-100 px-6 py-14"
       id="insurances"
     >
-      <div className="xl:w-[1048px] w-[95dvw]">
-        <h2 className="font-semibold text-xl md:text-3xl text-start">
+      <div className="w-[95dvw] xl:w-[1048px]">
+        <h2 className="text-start text-xl font-semibold md:text-3xl">
           {"Các chương trình bảo hiểm"}
         </h2>
-        <div className="flex flex-wrap justify-center mt-4 gap-6">
+        <div className="mt-4 flex flex-wrap justify-center gap-6">
           {insurances.map((insurance) => (
             <InsuranceCard
               key={insurance.id}

@@ -15,16 +15,16 @@ const slogan = [
 
 function BannerSlogan() {
   return (
-    <div className="absolute flex px-6 lg:px-14 py-10 items-center justify-center rounded-3xl bg-primary-foreground gap-6 bottom-0 translate-y-[100%] lg:translate-y-1/2 left-1/2 -translate-x-1/2 flex-col w-[95%] lg:w-fit lg:flex-row drop-shadow-xl">
-      <h3 className="text-2xl font-bold min-w-fit font-inter w-full lg:text-center lg:w-fit">
+    <div className="absolute bottom-0 left-1/2 flex w-[95%] -translate-x-1/2 translate-y-[100%] flex-col items-center justify-center gap-6 rounded-3xl bg-primary-foreground px-6 py-10 drop-shadow-xl lg:w-fit lg:translate-y-1/2 lg:flex-row lg:px-14">
+      <h3 className="w-full min-w-fit font-inter text-2xl font-bold lg:w-fit lg:text-center">
         {"Ưu điểm nổi bật"}
       </h3>
       {slogan.map((sloganItem, index) => (
         <div
-          className="flex flex-row lg:flex-col w-full lg:w-[250px] items-center md:items-start gap-x-4"
+          className="flex w-full flex-row items-center gap-x-4 md:items-start lg:w-[250px] lg:flex-col"
           key={index}
         >
-          <div className="bg-primary/10 rounded-full p-3 stroke-primary w-fit h-fit">
+          <div className="h-fit w-fit rounded-full bg-primary/10 stroke-primary p-3">
             <svg
               viewBox="0 0 24 24"
               focusable="false"

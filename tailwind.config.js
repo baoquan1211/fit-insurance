@@ -1,10 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: [
-    './src/**/*.{ts,tsx}',
-    './src/components/**/*.{ts,tsx}',
-	],
+  content: ["./src/**/*.{ts,tsx}", "./src/components/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
@@ -14,8 +11,8 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily:{
-        inter: ['Inter', 'sans-serif']
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -74,4 +71,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/select";
 import React from "react";
 
-export type SelectItemType = {
+export type SelectItem = {
   value: string;
   name: string;
 };
@@ -16,7 +16,7 @@ export type SelectItemType = {
 type SelectionFieldProps = {
   label?: string;
   placeholder?: string;
-  items: SelectItemType[];
+  items: SelectItem[];
   onChange: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
@@ -29,7 +29,7 @@ function SelectionField({
   return (
     <div>
       {label ? (
-        <label className="text-sm font-medium text-secondary-foreground/80 mb-1">
+        <label className="mb-1 text-sm font-medium text-secondary-foreground/80">
           {label}
         </label>
       ) : null}
@@ -37,7 +37,7 @@ function SelectionField({
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
-        <SelectContent className="p-3 border-black">
+        <SelectContent className="border-black p-3">
           <SelectGroup>
             {items.map((item, index) => (
               <SelectItem value={item.value} key={index}>

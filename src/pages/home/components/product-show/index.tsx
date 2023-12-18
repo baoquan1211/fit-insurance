@@ -1,29 +1,30 @@
 import ProductCard from "./product-card";
-import useInsuranceType from "../../hooks/useInsuranceType";
+import useFetchInsuranceType from "../../hooks/useFetchInsuranceType";
 
 export type InsuranceType = {
   name: string;
   slug: string;
   description: string;
+  advantage: string[];
   image: string;
   active: boolean;
   insurances?: [];
 };
 
 function ProductShow() {
-  const { data } = useInsuranceType();
-
+  const { data } = useFetchInsuranceType();
   return (
     <section
-      className="w-full mt-80 pt-16 mb-8 lg:mt-36 items-center flex flex-col px-4 lg:px-0"
+      className="mb-8 mt-80 flex w-full flex-col items-center px-4 pt-16 lg:mt-36 lg:px-0"
       id="insurances"
     >
-      <h2 className="text-2xl w-full md:text-center text-start md:text-3xl font-bold">
+      <h2 className="w-full text-start text-2xl font-bold md:text-center md:text-3xl">
         {"Các sản phẩm bảo hiểm"}
       </h2>
-      <div className="flex md:flex-row flex-col gap-8 mt-10">
+      <div className="mt-10 flex flex-col gap-8 md:flex-row">
         {data?.map((productItem: InsuranceType) => (
           <ProductCard
+            advantages={productItem.advantage}
             key={productItem.slug}
             name={productItem.name}
             slug={productItem.slug}

@@ -18,17 +18,17 @@ function UserDropDownMenu() {
   return (
     <>
       <HoverCard openDelay={100}>
-        <HoverCardTrigger className="flex gap-3 items-center">
+        <HoverCardTrigger className="flex items-center gap-3">
           <UserAvatar />
           <ChevronDown className="stroke-gray-" />
         </HoverCardTrigger>
-        <HoverCardContent className="z-30 drop-shadow-xl bg-primary-foreground flex flex-col rounded-md py-2 -translate-x-[10%]">
-          <Button variant={"ghost"} className="text-lg text-start">
+        <HoverCardContent className="z-30 flex -translate-x-[10%] flex-col rounded-md bg-primary-foreground py-2 drop-shadow-xl">
+          <Button variant={"ghost"} className="text-start text-lg">
             {auth.email}
           </Button>
           <Button
             variant={"ghost"}
-            className="text-primary hover:text-primary text-lg justify-between"
+            className="justify-between text-lg text-primary hover:text-primary"
             onClick={() => {
               if (auth.refresh !== null)
                 dispatch(logoutAction({ refreshToken: auth.refresh }));

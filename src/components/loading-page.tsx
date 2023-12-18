@@ -9,8 +9,8 @@ function LoadingPage({ isLayout = true }: LoadingPageProps) {
   return (
     <section
       className={cn(
-        "w-screen h-screen fixed top-0 left-0 z-50",
-        isLayout ? "bg-primary-foreground/80" : "bg-primary-foreground"
+        "fixed left-0 top-0 z-50 h-screen w-screen",
+        isLayout ? "bg-primary-foreground/80" : "bg-primary-foreground",
       )}
     >
       <div

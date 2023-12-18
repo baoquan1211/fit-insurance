@@ -76,12 +76,12 @@ function LoginPage() {
   return (
     <main
       onSubmit={loginHandle}
-      className="bg-gray-100 h-[calc(100dvh-72px)] flex justify-center py-16"
+      className="flex h-[calc(100dvh-72px)] justify-center bg-gray-100 py-16"
     >
-      <section className="bg-background h-fit p-16 rounded-xl flex flex-col gap-1 md:min-w-[500px]">
+      <section className="flex h-fit flex-col gap-1 rounded-xl bg-background p-16 md:min-w-[500px]">
         <h2 className="text-xl font-semibold">Đăng nhập</h2>
         <h3 className="text-sm">Cung cấp thông tin cần thiết để đăng nhập</h3>
-        <form className="flex flex-col gap-3 mt-6">
+        <form className="mt-6 flex flex-col gap-3">
           <InputField
             placeholder="Email"
             label="Email đã đăng ký tài khoản"

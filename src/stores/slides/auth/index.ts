@@ -6,7 +6,7 @@ import {
 } from "@/stores/actions/auth";
 import { jwtDecode } from "jwt-decode";
 
-export type authSlideType = {
+export type authSlideState = {
   status: "loading" | "idle" | "error" | "success";
   access: string | null;
   refresh: string | null;
@@ -14,7 +14,7 @@ export type authSlideType = {
   message: string | null;
 };
 
-const initialState: authSlideType = {
+const initialState: authSlideState = {
   status: "idle",
   access: null,
   refresh: null,
@@ -68,7 +68,7 @@ const authSlice = createSlice({
       state.status = "success";
       state.access = action.payload.data.access;
     });
-    builder.addCase(refreshAction.rejected, (state: authSlideType) => {
+    builder.addCase(refreshAction.rejected, (state) => {
       console.log("REFRESHING TOKEN FAILED");
       state.access = null;
       state.message = null;

@@ -4,12 +4,10 @@ import Banner from "../home/components/banner-carousel/banner";
 import InformationCard, {
   InformationItem,
 } from "./components/information-card";
-import ProductList, { Insurance } from "./components/product-list";
+import ProductList from "./components/product-list";
 import { useParams } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { DataResponse } from "@/services";
-import { findBySlug } from "@/services/app/insurance";
 import LoadingPage from "@/components/loading-page";
+import useFetchInsuranceBySlug from "./hooks/useFetchInsuranceBySlug";
 const ErrorPage = React.lazy(() => import("@/components/error-page"));
 
 const banners = [
@@ -51,22 +49,13 @@ const rules: InformationItem[] = [
 
 function InsurancePage() {
   const { slug } = useParams();
-  const { data, error } = useQuery({
-    queryKey: ["insurances"],
-    queryFn: async () => {
-      const response: DataResponse = await findBySlug(slug as string);
-      if (response.status && response.status >= 400) {
-        return Promise.reject(response.message);
-      }
-      if (response.data) return response.data as Insurance[];
-    },
-  });
+  const { data, error } = useFetchInsuranceBySlug(slug as string);
   if (error) return <ErrorPage />;
 
   if (data)
     return (
-      <main className="relative bg-background w-full">
-        <section className="relative flex flex-col w-full">
+      <main className="relative w-full bg-background">
+        <section className="relative flex w-full flex-col">
           {banners
             .filter((banner) => banner.slug === slug)
             .map((banner, index) => (
@@ -78,14 +67,14 @@ function InsurancePage() {
                 button="Mua ngay"
               />
             ))}
-          <div className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-[100%] lg:translate-y-1/2">
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[100%] lg:translate-y-1/2">
             <InformationCard
               informations={benefits}
               title={"Ưu điểm nổi bật"}
             />
           </div>
         </section>
-        <section className="bg-background py-20 w-full flex justify-center mt-72 lg:mt-40">
+        <section className="mt-72 flex w-full justify-center bg-background py-20 lg:mt-40">
           <InformationCard informations={rules} title={"Điều kiện tham gia"} />
         </section>
         <ProductList insurances={data} />
