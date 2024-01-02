@@ -8,11 +8,17 @@ const instance = axios.create({
   },
 });
 
-export interface DataResponse {
+export type SuccessResponse<T> = {
+  status: number;
+  data?: T;
+};
+
+export type ErrorResponse = {
   message?: string;
   status: number;
-  data?: unknown;
-}
+};
+
+export type ApiResponse<T> = SuccessResponse<T> & ErrorResponse;
 
 instance.interceptors.request.use(
   function (config) {
@@ -32,7 +38,7 @@ instance.interceptors.response.use(
     const res = {
       data: response.data,
       status: response.status,
-    } as AxiosResponse<DataResponse, unknown>;
+    } as AxiosResponse<SuccessResponse<unknown>>;
     return res;
   },
   function (error) {
@@ -58,7 +64,7 @@ instance.interceptors.response.use(
         useLogout();
       }
 
-      const response: DataResponse = {
+      const response: ErrorResponse = {
         message: error.response.data.error,
         status: error.response.status,
       };

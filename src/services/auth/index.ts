@@ -1,4 +1,4 @@
-import axios from "@/services";
+import axios, { ApiResponse } from "@/services";
 
 export interface LoginResquest {
   email: string;
@@ -10,8 +10,9 @@ export interface LoginSuccess {
   access: string;
 }
 
-const login = (data: LoginResquest) => {
-  return axios.post("/login", data);
+const login = async (data: LoginResquest) => {
+  const response: ApiResponse<LoginSuccess> = await axios.post("/login", data);
+  return response;
 };
 
 export interface RefreshTokenRequest {
@@ -22,10 +23,14 @@ export interface RefreshTokenSuccess {
   access: string;
 }
 
-const refresh = (refreshToken: string) => {
-  return axios.post("/refresh", {
-    refresh: refreshToken,
-  });
+const refresh = async (refreshToken: string) => {
+  const response: ApiResponse<RefreshTokenSuccess> = await axios.post(
+    "/refresh",
+    {
+      refresh: refreshToken,
+    },
+  );
+  return response;
 };
 
 const logout = (refreshToken: string) => {
@@ -38,8 +43,9 @@ export interface RegisterResquest {
   password: string;
 }
 
-const register = (data: RegisterResquest) => {
-  return axios.post<RegisterResquest>("/register", data);
+const register = async (data: RegisterResquest) => {
+  const response: ApiResponse<unknown> = await axios.post("/register", data);
+  return response;
 };
 
 export { login, refresh, logout, register };

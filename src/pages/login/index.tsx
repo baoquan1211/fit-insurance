@@ -1,15 +1,14 @@
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
 import { loginAction } from "@/stores/actions/auth";
-import { LoginResquest } from "@/services/auth";
+import { LoginResquest, LoginSuccess } from "@/services/auth";
 import { useRef, useEffect } from "react";
-import { useAppDispatch } from "@/hooks/redux.hook";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux.hook";
 import { ZodError, z } from "zod";
 import { Link } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { useAuth } from "@/hooks/auth.hook";
 import { useNavigate } from "react-router-dom";
-import { DataResponse } from "@/services";
+import { type ApiResponse } from "@/services";
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Email không hợp lệ" }),
@@ -19,7 +18,7 @@ const loginSchema = z.object({
 });
 
 function LoginPage() {
-  const auth = useAuth();
+  const auth = useAppSelector((state) => state.auth);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -42,7 +41,7 @@ function LoginPage() {
         })
         .then((data: LoginResquest) => {
           dispatch(loginAction(data)).then((res) => {
-            const data = res.payload as DataResponse;
+            const data = res.payload as ApiResponse<LoginSuccess>;
 
             if (data.status && data.status >= 400) {
               toast({
@@ -52,7 +51,8 @@ function LoginPage() {
                   "Thông tin đăng nhập không chính xác hoặc chưa tồn tại.",
               });
               return;
-            } else {
+            }
+            if (data.status === undefined) {
               toast({
                 variant: "destructive",
                 title: "Có lỗi xảy ra!",

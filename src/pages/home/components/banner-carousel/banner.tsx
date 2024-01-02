@@ -15,10 +15,10 @@ function Banner({
 }: BannerProps) {
   return (
     <div className="relative flex-col md:flex md:h-[50vh] lg:h-[60vh] xl:h-[70vh] 2xl:h-[100vh]">
-      <img src={bannerSrc} alt="banner" className="h-full w-full" />
+      <img src={bannerSrc} alt="banner" className="h-full" />
       <div className="left-[17%] top-[50%] flex w-full flex-col gap-y-6 px-6 py-10 text-black md:absolute md:w-fit md:-translate-y-1/2 md:gap-y-12">
         <span
-          className={`z-20 break-words text-2xl font-bold md:text-3xl xl:text-5xl ${
+          className={`z-20 text-pretty break-words text-2xl font-bold md:text-3xl xl:text-5xl ${
             titleColor === "white" ? "md:text-white" : "md:text-black"
           } md:max-w-[45%]`}
         >

@@ -6,7 +6,7 @@ function Spinner({ size = 16 }: SpinnerProps) {
   return (
     <svg
       aria-hidden="true"
-      className="animate-spin fill-primary text-gray-200 dark:text-gray-600"
+      className="animate-spin rounded-md fill-primary text-gray-200 ease-in-out dark:text-gray-600"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

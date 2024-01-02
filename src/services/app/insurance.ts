@@ -1,20 +1,46 @@
-import axios, { DataResponse } from "@/services";
+import axios, { ApiResponse } from "@/services";
 
-export const findBySlug = (slug: string) => {
-  return axios.get<DataResponse>(`/insurances/insurance-types/slug/${slug}`);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export interface Insurance extends Record<string, any> {
+  id: number;
+  insuranceTypeId: number;
+  name: string;
+  description: string;
+  minFeePerYear: number;
+  logo: string;
+  detail: string;
+  totalPayPerYear: number;
+  inpatientFeePayPerDay: number;
+  healthCheckFeePayBeforeInpatientPerYear: number;
+  healthCheckFeePayAfterInpatientPerYear: number;
+  surgicalFeePayPerYear: number;
+  medicalVehicleFeePayPerYear: number;
+  functionalRestorationPayPerYear: number;
+}
+
+export const findBySlug = async (slug: string) => {
+  const response: ApiResponse<Insurance[]> = await axios.get(
+    `/insurances/insurance-types/slug/${slug}`,
+  );
+  return response;
 };
 
-export const findById = (id: number) => {
-  return axios.get<DataResponse>(`/insurances/${id}`);
+export const findById = async (id: number) => {
+  const response: ApiResponse<Insurance> = await axios.get(`/insurances/${id}`);
+  return response;
 };
 
-export const calculateFee = (
+export const calculateFee = async (
   id: number,
   birthdate: string,
   startDate: string,
 ) => {
-  return axios.post<DataResponse>(`/insurances/${id}/calculate-fee`, {
-    birthdate,
-    startDate,
-  });
+  const response: ApiResponse<number> = await axios.post(
+    `/insurances/${id}/calculate-fee`,
+    {
+      birthdate,
+      startDate,
+    },
+  );
+  return response;
 };

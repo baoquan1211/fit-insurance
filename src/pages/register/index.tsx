@@ -1,13 +1,11 @@
 import InputField from "@/components/input-field";
 import { Button } from "@/components/ui/button";
-import { RegisterResquest } from "@/services/auth";
 import { useRef } from "react";
 import { ZodError, z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { register } from "@/services/auth";
-import { DataResponse } from "@/services";
+import useRegister from "./hooks/useRegister";
+import { ErrorResponse, SuccessResponse } from "@/services";
 
 const registerSchema = z
   .object({
@@ -30,12 +28,7 @@ function RegisterPage() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
-  const { mutateAsync, isPending } = useMutation({
-    mutationKey: ["register"],
-    mutationFn: (data: RegisterResquest) => {
-      return register(data);
-    },
-  });
+  const { mutateAsync, isPending } = useRegister();
   const { toast } = useToast();
 
   const loginHandle = (event: React.FormEvent<HTMLElement>) => {
@@ -55,26 +48,28 @@ function RegisterPage() {
         })
         .then((data) => {
           if (!isPending)
-            mutateAsync(data).then((res: DataResponse) => {
-              if (res.status >= 400) {
-                toast({
-                  variant: "destructive",
-                  title: "Có lỗi xảy ra!",
-                  description:
-                    res.message == "The email is existed"
-                      ? "Email đã tồn tại. Vui lòng điền email khác."
-                      : res.message,
-                });
-                return;
-              }
-              if (res.status === 201) {
-                toast({
-                  title: "Đăng ký thành công",
-                  description: "Vui lòng tiến hành đăng nhập",
-                });
-                navigate("/login");
-              }
-            });
+            mutateAsync(data).then(
+              (res: ErrorResponse & SuccessResponse<unknown>) => {
+                if (res.status >= 400) {
+                  toast({
+                    variant: "destructive",
+                    title: "Có lỗi xảy ra!",
+                    description:
+                      res.message == "The email is existed"
+                        ? "Email đã tồn tại. Vui lòng điền email khác."
+                        : res.message,
+                  });
+                  return;
+                }
+                if (res.status === 201) {
+                  toast({
+                    title: "Đăng ký thành công",
+                    description: "Vui lòng tiến hành đăng nhập",
+                  });
+                  navigate("/login");
+                }
+              },
+            );
         })
         .catch((err: string) => {
           const error: ZodError[] = JSON.parse(err);

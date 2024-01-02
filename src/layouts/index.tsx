@@ -5,6 +5,9 @@ import { useAuth } from "@/hooks/auth.hook";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import AutoScrollUpNavigateWrapper from "@/components/auto-scroll-up-navigate-wrapper";
+import { ErrorBoundary } from "react-error-boundary";
+
+import ErrorPage from "@/components/error-page";
 
 function RootLayout() {
   const auth = useAuth();
@@ -33,7 +36,9 @@ function RootLayout() {
   return (
     <AutoScrollUpNavigateWrapper>
       <Header />
-      <Outlet />
+      <ErrorBoundary fallback={<ErrorPage />}>
+        <Outlet />
+      </ErrorBoundary>
       <Toaster />
     </AutoScrollUpNavigateWrapper>
   );

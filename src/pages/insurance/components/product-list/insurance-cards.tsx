@@ -23,7 +23,7 @@ function InsuranceCard({ id, name, benefit, logoUrl, fee }: InsuranceCard) {
   return (
     <div className="flex h-fit w-[95%] flex-col gap-6 rounded-xl bg-primary-foreground p-6 drop-shadow-md sm:w-[333px]">
       <div className="flex justify-between">
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <img src={logoUrl} alt="logo" />
           <span className="text-lg font-bold">{name}</span>
         </div>

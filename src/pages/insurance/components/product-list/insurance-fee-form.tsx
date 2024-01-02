@@ -20,14 +20,14 @@ const insuranceOwners: SelectItem[] = [
 
 export type InsuranceRegistrationState = {
   insuranceId: number;
-  gender: string;
-  insuranceOwner: string;
+  gender: "MALE" | "FEMALE";
+  insuranceOwner: "self" | "family-member";
   birthdate: string;
   startDate: string;
 };
 
 function InsuranceFeeForm({ insuranceId }: { insuranceId: number }) {
-  const [gender, setGender] = useState<"male" | "female" | null>();
+  const [gender, setGender] = useState<"MALE" | "FEMALE" | null>();
   const [insuranceOwner, setInsuranceOwner] = useState<string | undefined>();
   const today = new Date();
   const tommorrow = new Date(+new Date() + 86400000);
@@ -88,8 +88,8 @@ function InsuranceFeeForm({ insuranceId }: { insuranceId: number }) {
           <div className="flex items-center gap-2">
             <Checkbox
               className="rounded-full"
-              checked={gender === "male"}
-              onClick={() => setGender("male")}
+              checked={gender === "MALE"}
+              onClick={() => setGender("MALE")}
               id="male-check-box"
             />
             <label htmlFor="male-check-box">Nam</label>
@@ -97,8 +97,8 @@ function InsuranceFeeForm({ insuranceId }: { insuranceId: number }) {
           <div className="flex items-center gap-2">
             <Checkbox
               className="rounded-full"
-              checked={gender === "female"}
-              onClick={() => setGender("female")}
+              checked={gender === "FEMALE"}
+              onClick={() => setGender("FEMALE")}
               id="female-check-box"
             />
             <label htmlFor="female-check-box">Nữ</label>

@@ -1,17 +1,15 @@
-import { Insurance } from "@/pages/insurance/components/product-list";
-import { DataResponse } from "@/services";
 import { findById } from "@/services/app/insurance";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 
 function useFetchInsuranceById(id: number) {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ["insurances", id],
     queryFn: async () => {
-      const response: DataResponse = await findById(id);
+      const response = await findById(id);
       if (response.status && response.status >= 400) {
         return Promise.reject(response.message);
       }
-      if (response.data) return response.data as Insurance;
+      if (response.data) return response.data;
     },
     staleTime: Infinity,
   });

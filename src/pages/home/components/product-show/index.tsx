@@ -1,16 +1,6 @@
 import ProductCard from "./product-card";
 import useFetchInsuranceType from "../../hooks/useFetchInsuranceType";
 
-export type InsuranceType = {
-  name: string;
-  slug: string;
-  description: string;
-  advantage: string[];
-  image: string;
-  active: boolean;
-  insurances?: [];
-};
-
 function ProductShow() {
   const { data } = useFetchInsuranceType();
   return (
@@ -22,7 +12,7 @@ function ProductShow() {
         {"Các sản phẩm bảo hiểm"}
       </h2>
       <div className="mt-10 flex flex-col gap-8 md:flex-row">
-        {data?.map((productItem: InsuranceType) => (
+        {data?.map((productItem) => (
           <ProductCard
             advantages={productItem.advantage}
             key={productItem.slug}

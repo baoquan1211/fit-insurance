@@ -1,24 +1,6 @@
 import React from "react";
 import InsuranceCard from "./insurance-cards";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface Insurance extends Record<string, any> {
-  id: number;
-  name: string;
-  description: string;
-  feePerMonth: number;
-  averageBenefit: number;
-  minFeePerYear: number;
-  benefit: number;
-  logo: string;
-  detail: string;
-  totalPayPerYear: number;
-  inpatientFeePayPerDay: number;
-  healthCheckFeePayPerYear: number;
-  surgicalFeePayPerYear: number;
-  medicalVehicleFeePayPerYear: number;
-  functionalRestorationPayPerYear: number;
-}
+import { Insurance } from "@/services/app/insurance";
 
 function ProductList({ insurances }: { insurances: Insurance[] }) {
   return (
