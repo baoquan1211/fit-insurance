@@ -29,9 +29,10 @@ function Footer() {
       <div className="flex w-full max-w-3xl flex-col justify-center border-b-2 py-2 xl:max-w-5xl">
         <Link
           to="/"
-          className="select-none text-3xl font-extrabold text-primary"
+          className="font-mplus flex select-none gap-1 text-3xl font-extrabold text-primary"
         >
-          fit<span className="text-foreground/95">@insurance</span>
+          <img src="/logo.svg" alt="logo" height={28} width={28} />
+          <span className="text-foreground/95">insurance</span>
         </Link>
         <div className="mt-6 flex w-full flex-col justify-between gap-2 md:flex-row">
           <div className="flex flex-col">

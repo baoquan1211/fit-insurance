@@ -12,7 +12,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        inter: ["Inter", "sans-serif"],
+        'inter': ['Inter', 'sans-serif'],
+        'mplus': ['M PLUS Rounded 1c', 'sans-serif']
       },
       colors: {
         border: "hsl(var(--border))",

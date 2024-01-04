@@ -12,11 +12,11 @@ function Header() {
       className="flex h-[72px] w-full items-center justify-between overflow-hidden bg-white px-3 font-sans md:px-8"
       id="header"
     >
-      <a
-        href={"/"}
-        className="select-none text-2xl font-extrabold text-primary md:text-3xl"
-      >
-        fit<span className="text-foreground/95">@insurance</span>
+      <a href={"/"} className="flex select-none gap-1 text-primary ">
+        <img src="/logo.svg" alt="logo" height={28} width={28} />
+        <span className="font-mplus text-[20px] font-extrabold text-foreground/95 md:text-[28px]">
+          insurance
+        </span>
       </a>
       <div className="hidden gap-6 md:flex">
         {!auth.access ? (

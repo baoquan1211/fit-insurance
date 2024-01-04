@@ -25,9 +25,10 @@ function BurgerMenu() {
         <SheetHeader className="border-b-[1px] p-3 drop-shadow-md">
           <Link
             to={"/"}
-            className="select-none text-[30px] font-extrabold text-primary"
+            className="font-mplus flex select-none justify-center gap-1 text-[30px] font-extrabold text-primary"
           >
-            fit<span className="text-foreground/95">@insurance</span>
+            <img src="/logo.svg" alt="logo" height={28} width={28} />
+            <span className="text-foreground/95">insurance</span>
           </Link>
         </SheetHeader>
         <MenuContent />

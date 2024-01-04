@@ -1,28 +1,48 @@
+import React from "react";
 import { formatDate, convertGender, numberToCurrency } from "@/lib/utils";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import AlertIcon from "@/components/alert-icon";
-import { Button } from "@/components/ui/button";
 import useFetchContractById from "@/hooks/useFetchContractById";
 import { useParams } from "react-router-dom";
 import useFetchInsuranceTypeById from "@/hooks/useFetchInsuranceTypeById";
 import useFetchInsuranceById from "@/hooks/useFetchInsuranceById";
-import ContractStatusField from "./components/contract-status";
-import PaymentBox from "./components/payment-box";
+import { Contract } from "@/services/app/contract";
+
+const ContractStatusField = React.lazy(
+  () => import("./components/contract-status-field"),
+);
+const PaymentContractBox = React.lazy(
+  () => import("./components/payment-contract-box"),
+);
+const ActiveContractBox = React.lazy(
+  () => import("./components/active-contract-box"),
+);
+const ExpiredContractBox = React.lazy(
+  () => import("./components/expired-contract-box"),
+);
 
 type InsuredPersonInfo = {
   key: string;
   title: string;
   type?: "string" | "date" | "gender";
 };
+
+export enum ContractStatus {
+  INITIAL,
+  WAIT_FOR_PAYMENT,
+  EXPIRED_PAYMENT,
+  ACTIVE,
+  EXPIRED,
+}
+
+export function handleStatusContract(contract: Contract) {
+  if (contract?.status === "UNPAID") {
+    if (+new Date() >= +new Date(contract?.startAt)) {
+      return ContractStatus.EXPIRED_PAYMENT;
+    } else return ContractStatus.WAIT_FOR_PAYMENT;
+  }
+  if (contract?.status === "INITIAL") return ContractStatus.INITIAL;
+  if (contract?.status === "ACTIVE") return ContractStatus.ACTIVE;
+  if (contract?.status === "EXPIRED") return ContractStatus.EXPIRED;
+}
 
 const insuredPersonInfo: InsuredPersonInfo[] = [
   { key: "name", title: "Họ và tên" },
@@ -144,50 +164,14 @@ function ContractDetail() {
               </div>
             </div>
 
-            {contract?.status === "INITIAL" ||
-            contract?.status === "INITIAL" ? (
-              <PaymentBox contract={contract} />
+            {handleStatusContract(contract) ===
+              ContractStatus.WAIT_FOR_PAYMENT ||
+            handleStatusContract(contract) === ContractStatus.INITIAL ? (
+              <PaymentContractBox contract={contract} />
+            ) : handleStatusContract(contract) === ContractStatus.ACTIVE ? (
+              <ActiveContractBox />
             ) : (
-              <div className="sticky bottom-0 left-0 flex h-fit w-full flex-row gap-3 rounded-lg bg-background p-3 md:p-6 lg:w-fit lg:flex-col">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className="font-me w-full border-[1px] border-primary text-primary hover:bg-primary/5 hover:text-primary lg:w-[250px]"
-                    >
-                      Mua lại
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent className="flex flex-col items-center">
-                    <AlertIcon height={48} width={48} />
-                    <DialogHeader>
-                      <DialogTitle>Không đủ điều kiện mua bảo hiểm</DialogTitle>
-                      <DialogDescription>
-                        Lịch sử bệnh lý của Người được bảo hiểm chưa đảm bảo
-                        điều kiện tham gia bảo hiểm sức khỏe
-                      </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter className="flex w-full gap-1">
-                      <Button
-                        variant={"outline"}
-                        className="flex-1 border-primary text-primary hover:bg-primary/5 hover:text-primary"
-                      >
-                        Quay về trang chủ
-                      </Button>
-
-                      <Button className="flex-1">
-                        Thay đổi Người được bảo hiểm
-                      </Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-                <Button
-                  variant={"outline"}
-                  className="w-full border-[1px] border-primary font-medium text-primary hover:bg-primary/5 hover:text-primary lg:w-[250px]"
-                >
-                  Xóa
-                </Button>
-              </div>
+              <ExpiredContractBox />
             )}
           </div>
         </section>
