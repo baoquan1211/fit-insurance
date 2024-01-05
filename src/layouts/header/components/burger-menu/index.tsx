@@ -1,5 +1,6 @@
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTrigger,
@@ -22,14 +23,16 @@ function BurgerMenu() {
         side={"left"}
         className="z-[1100] w-full rounded-tr-3xl p-0 drop-shadow-2xl"
       >
-        <SheetHeader className="border-b-[1px] p-3 drop-shadow-md">
-          <Link
-            to={"/"}
-            className="font-mplus flex select-none justify-center gap-1 text-[30px] font-extrabold text-primary"
-          >
-            <img src="/logo.svg" alt="logo" height={28} width={28} />
-            <span className="text-foreground/95">insurance</span>
-          </Link>
+        <SheetHeader className="flex w-full flex-row justify-center border-b-[1px] p-3 drop-shadow-md">
+          <SheetClose asChild>
+            <Link
+              to={"/"}
+              className="font-mplus flex w-fit select-none justify-center gap-1 text-[30px] font-extrabold text-primary"
+            >
+              <img src="/logo.svg" alt="logo" height={28} width={28} />
+              <span className="text-foreground/95">insurance</span>
+            </Link>
+          </SheetClose>
         </SheetHeader>
         <MenuContent />
       </SheetContent>

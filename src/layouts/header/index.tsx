@@ -9,7 +9,7 @@ function Header() {
 
   return (
     <header
-      className="flex h-[72px] w-full items-center justify-between overflow-hidden bg-white px-3 font-sans md:px-8"
+      className="flex h-[72px] w-full items-center justify-between overflow-hidden bg-white px-6 font-sans md:px-8"
       id="header"
     >
       <a href={"/"} className="flex select-none gap-1 text-primary ">
@@ -32,6 +32,7 @@ function Header() {
             <Button
               variant={"outline"}
               className="border-[1px] border-primary text-primary hover:text-primary"
+              onClick={() => navigate("/hopdong/quan-ly")}
             >
               Quản lý hợp đồng
             </Button>

@@ -20,6 +20,7 @@ const InsuranceDetailPage = React.lazy(
 const HealthQuestionPage = React.lazy(() => import("./pages/health-question"));
 const InsuredPerson = React.lazy(() => import("./pages/insured-person"));
 const ContractDetail = React.lazy(() => import("./pages/contract-detail"));
+const ContractManage = React.lazy(() => import("./pages/contract-manage"));
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,10 @@ function App() {
                     <Route
                       path="hopdong/chi-tiet/:id"
                       element={<ContractDetail />}
+                    />
+                    <Route
+                      path="/hopdong/quan-ly"
+                      element={<ContractManage />}
                     />
                     // Co footer
                     <Route element={<FooterLayout />}>

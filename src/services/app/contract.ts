@@ -51,3 +51,13 @@ export const getPaymentUrl = async (id: number) => {
   );
   return response;
 };
+
+export const findByEmail = async (
+  email: string,
+  status: "active" | "incomplete" | "expired" | "all" = "all",
+) => {
+  const response: ApiResponse<Contract[]> = await axios.get(
+    `/contracts?email=${email}&status=${status}`,
+  );
+  return response;
+};

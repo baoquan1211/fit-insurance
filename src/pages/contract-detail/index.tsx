@@ -64,6 +64,7 @@ function ContractDetail() {
   const { data: insuranceType } = useFetchInsuranceTypeById(
     Number(insurance?.insuranceTypeId),
   );
+  const contractStatus = handleStatusContract(contract!);
 
   if (contract) {
     return (
@@ -94,7 +95,10 @@ function ContractDetail() {
                       <div className="w-28 text-sm font-medium text-slate-500 md:w-40">
                         Trạng thái
                       </div>
-                      <ContractStatusField contract={contract} />
+                      <ContractStatusField
+                        contract={contract}
+                        status={contractStatus!}
+                      />
                     </div>
                   ) : null}
                 </div>
@@ -123,7 +127,7 @@ function ContractDetail() {
                       Thời hạn bảo hiểm
                     </div>
                     <div className="break-words">
-                      {formatDate(contract?.startAt as string)} {" - "}{" "}
+                      {formatDate(contract?.startAt as string)} {" - "}
                       {formatDate(contract?.endAt as string)}
                     </div>
                   </div>
@@ -164,11 +168,10 @@ function ContractDetail() {
               </div>
             </div>
 
-            {handleStatusContract(contract) ===
-              ContractStatus.WAIT_FOR_PAYMENT ||
-            handleStatusContract(contract) === ContractStatus.INITIAL ? (
+            {contractStatus === ContractStatus.WAIT_FOR_PAYMENT ||
+            contractStatus === ContractStatus.INITIAL ? (
               <PaymentContractBox contract={contract} />
-            ) : handleStatusContract(contract) === ContractStatus.ACTIVE ? (
+            ) : contractStatus === ContractStatus.ACTIVE ? (
               <ActiveContractBox />
             ) : (
               <ExpiredContractBox />

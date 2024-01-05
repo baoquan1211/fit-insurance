@@ -5,9 +5,10 @@ import { ContractStatus, handleStatusContract } from "..";
 
 type ContractStatusProps = {
   contract: Contract;
+  status: ContractStatus;
 };
 
-function ContractStatusField({ contract }: ContractStatusProps) {
+function ContractStatusField({ contract, status }: ContractStatusProps) {
   const ContractStatusFieldInfo = {
     [ContractStatus.INITIAL]: {
       style: "border-primary bg-primary/5 text-primary",
@@ -30,6 +31,7 @@ function ContractStatusField({ contract }: ContractStatusProps) {
       label: "Hết hạn hợp đồng",
     },
   };
+
   return (
     <div
       className={cn(
@@ -39,11 +41,7 @@ function ContractStatusField({ contract }: ContractStatusProps) {
         ]?.style}`,
       )}
     >
-      {
-        ContractStatusFieldInfo[
-          handleStatusContract(contract) as ContractStatus
-        ]?.label
-      }
+      {ContractStatusFieldInfo[status]?.label}
     </div>
   );
 }

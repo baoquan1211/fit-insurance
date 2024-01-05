@@ -98,7 +98,6 @@ function InsuranceDetailPage() {
           </div>
           {benefits.map((benifit, index) => (
             <React.Fragment key={index}>
-              {" "}
               <div className="bg-gray-100 p-4 font-[600]">
                 {benifit.title}{" "}
                 <span className="text-xs font-[500] text-gray-600">
