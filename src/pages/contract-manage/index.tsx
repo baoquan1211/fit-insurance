@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "react-router-dom";
 import ContractList from "./components/contract-list";
+import { useAppSelector } from "@/hooks/redux.hook";
 
 const Spinner = React.lazy(() => import("@/components/ui/spinner"));
 
@@ -25,10 +26,12 @@ const tabs: TabType[] = [
   },
 ];
 
-function ContractManage() {
+function ContractManagePage() {
   const [searchParams, setSearchParams] = useSearchParams({
     tab: "1",
   });
+  const auth = useAppSelector((state) => state.auth);
+  if (auth.access === null) return null;
 
   return (
     <main className="relative min-h-[calc(100dvh-72px)] w-full bg-gray-100">
@@ -37,7 +40,7 @@ function ContractManage() {
           <h1 className="mb-4 self-start text-2xl font-semibold">
             Quản lý hợp đồng
           </h1>
-          <div className="flex gap-6 overflow-x-auto lg:gap-16">
+          <div className="flex max-w-full gap-6 overflow-x-auto lg:gap-16">
             {tabs.map((tab) => (
               <button
                 key={tab.tab}
@@ -80,4 +83,4 @@ function ContractManage() {
   );
 }
 
-export default ContractManage;
+export default ContractManagePage;

@@ -54,7 +54,7 @@ const insuredPersonInfo: InsuredPersonInfo[] = [
   { key: "address", title: "Địa chỉ liên lạc" },
 ];
 
-function ContractDetail() {
+function ContractDetailPage() {
   const { id } = useParams();
   const { data: contract } = useFetchContractById(Number(id));
 
@@ -183,4 +183,4 @@ function ContractDetail() {
   }
 }
 
-export default ContractDetail;
+export default ContractDetailPage;

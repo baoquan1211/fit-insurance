@@ -11,6 +11,7 @@ function useCalculateFee(id: number, birthdate: string, startDate: string) {
       }
       if (response.data) return response.data as number;
     },
+    staleTime: Infinity,
   });
 }
 

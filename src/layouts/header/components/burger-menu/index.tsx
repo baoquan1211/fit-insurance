@@ -27,7 +27,7 @@ function BurgerMenu() {
           <SheetClose asChild>
             <Link
               to={"/"}
-              className="font-mplus flex w-fit select-none justify-center gap-1 text-[30px] font-extrabold text-primary"
+              className="flex w-fit select-none justify-center gap-1 font-mplus text-[30px] font-extrabold text-primary"
             >
               <img src="/logo.svg" alt="logo" height={28} width={28} />
               <span className="text-foreground/95">insurance</span>

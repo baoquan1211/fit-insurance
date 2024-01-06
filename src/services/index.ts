@@ -48,7 +48,7 @@ instance.interceptors.response.use(
 
     const { response, config } = error;
     if (
-      response.status === 401 &&
+      (response.status === 401 || response.status === 403) &&
       config.url !== "/refresh" &&
       config.url !== "/login" &&
       config.url !== "/logout" &&

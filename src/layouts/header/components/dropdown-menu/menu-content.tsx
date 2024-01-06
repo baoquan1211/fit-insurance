@@ -28,8 +28,9 @@ function MenuContent() {
         className="justify-between text-sm text-primary hover:text-primary"
         onClick={() => {
           if (auth.refresh !== null) {
-            dispatch(logoutAction({ refreshToken: auth.refresh }));
-            queryClient.invalidateQueries();
+            dispatch(logoutAction({ refreshToken: auth.refresh })).then(() => {
+              queryClient.invalidateQueries();
+            });
           }
         }}
       >

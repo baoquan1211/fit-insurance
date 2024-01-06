@@ -34,9 +34,9 @@ const authSlice = createSlice({
     });
     builder.addCase(loginAction.fulfilled, (state, action) => {
       state.status = "success";
-      state.access = action.payload.data.access;
-      state.refresh = action.payload.data.refresh;
-      const decodedAccess = jwtDecode(action.payload.data.access);
+      state.access = action.payload.data?.access as string;
+      state.refresh = action.payload.data?.refresh as string;
+      const decodedAccess = jwtDecode(action.payload.data?.access as string);
       state.email = decodedAccess.sub as string;
     });
     builder.addCase(loginAction.rejected, (state) => {
@@ -58,7 +58,6 @@ const authSlice = createSlice({
       state.status = "error";
     });
     builder.addCase(refreshAction.pending, (state, action) => {
-      console.log(action);
       state.status = "loading";
       state.access = null;
       state.message = null;
@@ -66,7 +65,7 @@ const authSlice = createSlice({
     builder.addCase(refreshAction.fulfilled, (state, action) => {
       console.log("REFRESHING TOKEN FINISHED");
       state.status = "success";
-      state.access = action.payload.data.access;
+      state.access = action.payload.data?.access as string;
     });
     builder.addCase(refreshAction.rejected, (state) => {
       console.log("REFRESHING TOKEN FAILED");

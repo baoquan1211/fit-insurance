@@ -6,13 +6,13 @@ function useFetchContractByBuyer(
   status: "active" | "incomplete" | "expired" | "all",
 ) {
   return useSuspenseQuery({
-    queryKey: ["contract-email", email, status],
+    queryKey: ["contracts-by-buyer", email, status],
     queryFn: async () => {
       const response = await findByEmail(email, status);
       if (response.status >= 400) throw new Error(response.message);
       return response.data;
     },
-    staleTime: 1000,
+    staleTime: 5 * 60 * 1000,
   });
 }
 

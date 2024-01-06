@@ -40,7 +40,7 @@ const contractCreationSchema = z.object({
 
 export type ContractCreation = z.infer<typeof contractCreationSchema>;
 
-function InsuredPerson() {
+function InsuredPersonPage() {
   const location = useLocation();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.auth);
@@ -210,4 +210,4 @@ function InsuredPerson() {
   );
 }
 
-export default InsuredPerson;
+export default InsuredPersonPage;

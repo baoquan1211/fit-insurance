@@ -19,7 +19,7 @@ function Header() {
         </span>
       </a>
       <div className="hidden gap-6 md:flex">
-        {!auth.access ? (
+        {auth.access === null ? (
           <Button
             variant={"outline"}
             className="border-[1px] border-primary text-primary hover:text-primary"

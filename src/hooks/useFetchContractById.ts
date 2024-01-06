@@ -3,7 +3,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 
 function useFetchContractById(id: number) {
   return useSuspenseQuery({
-    queryKey: ["contract", id],
+    queryKey: ["contracts", id],
     queryFn: async () => {
       const response = await findById(id);
       if (response.status >= 400) throw new Error(response.message);
