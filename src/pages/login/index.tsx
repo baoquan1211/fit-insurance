@@ -26,7 +26,7 @@ function LoginPage() {
   const { toast } = useToast();
 
   useEffect(() => {
-    if (auth.access && auth.refresh) {
+    if (auth.access) {
       navigate("/");
     }
   });

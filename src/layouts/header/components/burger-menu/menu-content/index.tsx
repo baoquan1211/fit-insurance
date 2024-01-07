@@ -43,13 +43,9 @@ function MenuContent() {
               variant={"ghost"}
               className="justify-between text-sm text-primary hover:bg-background hover:text-primary"
               onClick={() => {
-                if (auth.refresh !== null) {
-                  dispatch(logoutAction({ refreshToken: auth.refresh })).then(
-                    () => {
-                      queryClient.invalidateQueries();
-                    },
-                  );
-                }
+                dispatch(logoutAction()).then(() => {
+                  queryClient.invalidateQueries();
+                });
               }}
             >
               Đăng xuất

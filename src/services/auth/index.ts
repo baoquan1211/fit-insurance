@@ -15,26 +15,18 @@ const login = async (data: LoginResquest) => {
   return response;
 };
 
-export interface RefreshTokenRequest {
-  refresh: string;
-}
-
 export interface RefreshTokenSuccess {
   access: string;
 }
 
-const refresh = async (refreshToken: string) => {
-  const response: ApiResponse<RefreshTokenSuccess> = await axios.post(
-    "/refresh",
-    {
-      refresh: refreshToken,
-    },
-  );
+const refresh = async () => {
+  const response: ApiResponse<RefreshTokenSuccess> =
+    await axios.get("/refresh");
   return response;
 };
 
-const logout = (refreshToken: string) => {
-  return axios.post("/logout", { refresh: refreshToken });
+const logout = () => {
+  return axios.get("/logout");
 };
 
 export interface RegisterResquest {

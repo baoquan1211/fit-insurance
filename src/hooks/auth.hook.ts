@@ -7,11 +7,9 @@ export function useAuth() {
 }
 
 export function useRefresh() {
-  const refreshToken = store.getState().auth.refresh;
-  if (refreshToken !== null) store.dispatch(refreshAction({ refreshToken }));
+  store.dispatch(refreshAction());
 }
 
 export function useLogout() {
-  const refreshToken = store.getState().auth.refresh;
-  if (refreshToken !== null) store.dispatch(logoutAction({ refreshToken }));
+  store.dispatch(logoutAction());
 }

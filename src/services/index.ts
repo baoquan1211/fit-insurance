@@ -4,8 +4,9 @@ import axios, { AxiosResponse } from "axios";
 const instance = axios.create({
   baseURL: `${import.meta.env.VITE_SERVER_URL}/api/v1`,
   headers: {
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": import.meta.env.VITE_SERVER_URL,
   },
+  withCredentials: true,
 });
 
 export type SuccessResponse<T> = {
@@ -56,7 +57,6 @@ instance.interceptors.response.use(
       config.url !== "/change-password"
     ) {
       {
-        console.log("REFRESHING TOKEN");
         useRefresh();
       }
     } else {

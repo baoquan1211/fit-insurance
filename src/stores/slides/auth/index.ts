@@ -9,7 +9,6 @@ import { jwtDecode } from "jwt-decode";
 export type authSlideState = {
   status: "loading" | "idle" | "error" | "success";
   access: string | null;
-  refresh: string | null;
   email: string | null;
   message: string | null;
 };
@@ -17,7 +16,6 @@ export type authSlideState = {
 const initialState: authSlideState = {
   status: "idle",
   access: null,
-  refresh: null,
   email: null,
   message: null,
 };
@@ -30,12 +28,10 @@ const authSlice = createSlice({
     builder.addCase(loginAction.pending, (state) => {
       state.status = "loading";
       state.access = null;
-      state.refresh = null;
     });
     builder.addCase(loginAction.fulfilled, (state, action) => {
       state.status = "success";
       state.access = action.payload.data?.access as string;
-      state.refresh = action.payload.data?.refresh as string;
       const decodedAccess = jwtDecode(action.payload.data?.access as string);
       state.email = decodedAccess.sub as string;
     });
@@ -51,28 +47,27 @@ const authSlice = createSlice({
       state.access = null;
       state.message = null;
       state.status = "idle";
-      state.refresh = null;
       state.email = null;
     });
     builder.addCase(logoutAction.rejected, (state) => {
       state.status = "error";
     });
-    builder.addCase(refreshAction.pending, (state, action) => {
+    builder.addCase(refreshAction.pending, (state) => {
+      console.log("INFO: Refreshing token");
       state.status = "loading";
       state.access = null;
       state.message = null;
     });
     builder.addCase(refreshAction.fulfilled, (state, action) => {
-      console.log("REFRESHING TOKEN FINISHED");
+      console.log("INFO: Refreshing token successfully");
       state.status = "success";
       state.access = action.payload.data?.access as string;
     });
     builder.addCase(refreshAction.rejected, (state) => {
-      console.log("REFRESHING TOKEN FAILED");
+      console.log("INFO: Refreshing token failed");
       state.access = null;
       state.message = null;
       state.status = "error";
-      state.refresh = null;
       state.email = null;
     });
   },

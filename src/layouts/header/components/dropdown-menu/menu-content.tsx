@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { logoutAction } from "@/stores/actions/auth";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux.hook";
+import { useAppDispatch } from "@/hooks/redux.hook";
 import useUser from "@/hooks/useUser";
 import { useQueryClient } from "@tanstack/react-query";
 
 function MenuContent() {
-  const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const { data: user } = useUser();
   const queryClient = useQueryClient();
@@ -27,11 +26,9 @@ function MenuContent() {
         variant={"ghost"}
         className="justify-between text-sm text-primary hover:text-primary"
         onClick={() => {
-          if (auth.refresh !== null) {
-            dispatch(logoutAction({ refreshToken: auth.refresh })).then(() => {
-              queryClient.invalidateQueries();
-            });
-          }
+          dispatch(logoutAction()).then(() => {
+            queryClient.invalidateQueries();
+          });
         }}
       >
         Đăng xuất
