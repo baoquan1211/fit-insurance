@@ -1,5 +1,12 @@
 import axios, { ApiResponse } from "@/services";
 
+export type Benefit = {
+  id: number;
+  name: string;
+  unit: string;
+  amount: number;
+};
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Insurance extends Record<string, any> {
   id: number;
@@ -16,6 +23,7 @@ export interface Insurance extends Record<string, any> {
   surgicalFeePayPerYear: number;
   medicalVehicleFeePayPerYear: number;
   functionalRestorationPayPerYear: number;
+  benefits: Benefit[];
 }
 
 export const findBySlug = async (slug: string) => {

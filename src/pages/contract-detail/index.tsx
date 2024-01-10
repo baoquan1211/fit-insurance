@@ -146,6 +146,7 @@ function ContractDetailPage() {
                 <h2 className="text-xl font-semibold">
                   Thông tin người được bảo hiểm
                 </h2>
+
                 <div className="flex flex-col gap-6">
                   {insuredPersonInfo.map((info) => (
                     <div
@@ -155,7 +156,7 @@ function ContractDetailPage() {
                       <div className="w-28 text-sm font-medium text-slate-500 md:w-40">
                         {info.title}
                       </div>
-                      <div className="max-w-[480px] overflow-clip text-wrap">
+                      <div className="max-w-[400px] overflow-clip text-wrap">
                         {info.type == "gender"
                           ? convertGender(contract[info.key])
                           : info.type == "date"

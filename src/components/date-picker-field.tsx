@@ -35,6 +35,7 @@ function DatePickerField({
     const today = new Date();
     return (today.getFullYear() - 19) as number;
   }, []);
+  const DAY_MICROSECOND = 86_400_000;
 
   return (
     <div className="flex flex-col">
@@ -61,8 +62,11 @@ function DatePickerField({
             mode="single"
             selected={date}
             onSelect={(date) => {
-              console.log(date, fromDate);
-              if (fromDate && date && date <= new Date(+fromDate - 86400000)) {
+              if (
+                fromDate &&
+                date &&
+                date <= new Date(+fromDate - DAY_MICROSECOND)
+              ) {
                 return;
               }
 

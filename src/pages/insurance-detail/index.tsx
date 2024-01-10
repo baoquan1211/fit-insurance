@@ -8,50 +8,6 @@ import useCalculateFee from "@/hooks/useCalculateFee";
 
 const ErrorPage = React.lazy(() => import("@/components/error-page"));
 
-export type Benefit = {
-  title: string;
-  unit: string;
-  key: string;
-};
-
-const benefits: Benefit[] = [
-  {
-    title: "Tổng hạn mức chi trả",
-    unit: "Số tiền/người/năm",
-    key: "totalPayPerYear",
-  },
-  {
-    title: "Chi phí nằm viện",
-    unit: "Số tiền/ngày",
-    key: "inpatientFeePayPerDay",
-  },
-  {
-    title: "Chi phí khám và điều trị trong vòng 30 ngày trước khi nhập viện",
-    unit: "Số tiền/năm",
-    key: "healthCheckFeePayBeforeInpatientPerYear",
-  },
-  {
-    title: "Chi phí khám và điều trị trong vòng 30 ngày sau khi nhập viện",
-    unit: "Số tiền/năm",
-    key: "healthCheckFeePayAfterInpatientPerYear",
-  },
-  {
-    title: "Dịch vụ xe cứu thương, xe cấp cứu bằng đường bộ",
-    unit: "Số tiền/năm",
-    key: "medicalVehicleFeePayPerYear",
-  },
-  {
-    title: "Chi phí phẫu thuật",
-    unit: "Số tiền/năm",
-    key: "surgicalFeePayPerYear",
-  },
-  {
-    title: "Phục hồi chức năng",
-    unit: "Số tiền/năm",
-    key: "functionalRestorationPayPerYear",
-  },
-];
-
 function InsuranceDetailPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -96,19 +52,31 @@ function InsuranceDetailPage() {
               </Button>
             </div>
           </div>
-          {benefits.map((benifit, index) => (
-            <React.Fragment key={index}>
-              <div className="bg-gray-100 p-4 font-[600]">
-                {benifit.title}{" "}
-                <span className="text-xs font-[500] text-gray-600">
-                  ({benifit.unit})
-                </span>
-              </div>
-              <div className="p-4 text-sm font-[500]">
-                {numberToCurrency(insurance[benifit.key])}đ
-              </div>
-            </React.Fragment>
-          ))}
+          <div className="bg-gray-100 p-4 font-[600]">
+            Tổng hạn mức chi trả{" "}
+            <span className="text-xs font-[500] text-gray-600">
+              (Số tiền/năm)
+            </span>
+          </div>
+          <div className="p-4 text-sm font-[500]">
+            {numberToCurrency(insurance?.totalPayPerYear)}đ
+          </div>
+          {insurance?.benefits
+            .sort((a, b) => a.amount - b.amount)
+            .map((benifit, index) => (
+              <React.Fragment key={index}>
+                <div className="bg-gray-100 p-4 font-[600]">
+                  {benifit?.name}{" "}
+                  <span className="text-xs font-[500] text-gray-600">
+                    ({benifit?.unit})
+                  </span>
+                </div>
+                <div className="p-4 text-sm font-[500]">
+                  {/* {numberToCurrency(insurance[benifit.key])}đ */}
+                  {numberToCurrency(benifit?.amount)}đ
+                </div>
+              </React.Fragment>
+            ))}
         </section>
       </main>
     );

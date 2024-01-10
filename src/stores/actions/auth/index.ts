@@ -18,9 +18,9 @@ export const loginAction = createAsyncThunk(
 
 export const logoutAction = createAsyncThunk(
   "auth/logout",
-  async ({ refreshToken }: { refreshToken: string }, thunkAPI) => {
+  async (_, thunkAPI) => {
     try {
-      const response = await logout(refreshToken);
+      const response = await logout();
       if (response.status == 401 || response.status == 403)
         return thunkAPI.rejectWithValue(response.data);
       return response;
