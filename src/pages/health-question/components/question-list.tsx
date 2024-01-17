@@ -88,7 +88,7 @@ function QuestionList() {
           </h3>
           {question.information ? (
             <Sheet>
-              <SheetTrigger className="w-fit font-medium text-cyan-500">
+              <SheetTrigger className="w-fit text-left font-medium text-cyan-500">
                 {question.information.title}
               </SheetTrigger>
               <SheetContent className="overflow-y-auto">

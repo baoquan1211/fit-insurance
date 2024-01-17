@@ -6,7 +6,6 @@ export interface LoginResquest {
 }
 
 export interface LoginSuccess {
-  refresh: string;
   access: string;
 }
 

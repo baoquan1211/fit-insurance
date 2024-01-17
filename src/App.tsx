@@ -18,9 +18,12 @@ const InsuranceDetailPage = React.lazy(
   () => import("./pages/insurance-detail"),
 );
 const HealthQuestionPage = React.lazy(() => import("./pages/health-question"));
-const InsuredPerson = React.lazy(() => import("./pages/insured-person"));
-const ContractDetail = React.lazy(() => import("./pages/contract-detail"));
-const ContractManage = React.lazy(() => import("./pages/contract-manage"));
+const InsuredRegisterPage = React.lazy(
+  () => import("./pages/insured-register"),
+);
+const ContractDetailPage = React.lazy(() => import("./pages/contract-detail"));
+const ContractManagePage = React.lazy(() => import("./pages/contract-manage"));
+const PayoutRequestPage = React.lazy(() => import("./pages/payout-request"));
 
 const queryClient = new QueryClient();
 
@@ -46,15 +49,19 @@ function App() {
                     />
                     <Route
                       path="dang-ky-thong-tin"
-                      element={<InsuredPerson />}
+                      element={<InsuredRegisterPage />}
                     />
                     <Route
                       path="hopdong/chi-tiet/:id"
-                      element={<ContractDetail />}
+                      element={<ContractDetailPage />}
                     />
                     <Route
                       path="/hopdong/quan-ly"
-                      element={<ContractManage />}
+                      element={<ContractManagePage />}
+                    />
+                    <Route
+                      path="/yeu-cau-thanh-toan"
+                      element={<PayoutRequestPage />}
                     />
                     // Co footer
                     <Route element={<FooterLayout />}>

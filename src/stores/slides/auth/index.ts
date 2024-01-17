@@ -64,7 +64,7 @@ const authSlice = createSlice({
       state.access = action.payload.data?.access as string;
     });
     builder.addCase(refreshAction.rejected, (state) => {
-      console.log("INFO: Refreshing token failed");
+      console.log("ERROR: Refreshing token failed");
       state.access = null;
       state.message = null;
       state.status = "error";

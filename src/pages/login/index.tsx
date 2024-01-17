@@ -33,7 +33,7 @@ function LoginPage() {
 
   const loginHandle = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
-    if (emailRef.current && passwordRef.current) {
+    if (emailRef.current && passwordRef.current && auth.status !== "loading") {
       loginSchema
         .parseAsync({
           email: emailRef.current.value as string,

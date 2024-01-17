@@ -23,7 +23,7 @@ function InputField({
 }: InputFieldProps) {
   const id = useId();
   return (
-    <div className={cn("flex flex-col", className)}>
+    <div className={"flex flex-col"}>
       {label ? (
         <label
           htmlFor={id}

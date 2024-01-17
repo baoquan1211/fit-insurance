@@ -78,7 +78,7 @@ export function ComboboxField({
             </span>
 
             {loading ? (
-              <Spinner size={16} />
+              <Spinner size={16} hasLogo={false} />
             ) : (
               <ChevronDown className="ml-2 size-4 shrink-0 opacity-50" />
             )}

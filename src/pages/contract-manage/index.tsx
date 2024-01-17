@@ -40,7 +40,7 @@ function ContractManagePage() {
           <h1 className="mb-4 self-start text-2xl font-semibold">
             Quản lý hợp đồng
           </h1>
-          <div className="flex max-w-full gap-6 overflow-x-auto lg:gap-16">
+          <div className="flex max-w-full gap-6 overflow-auto lg:gap-16">
             {tabs.map((tab) => (
               <button
                 key={tab.tab}

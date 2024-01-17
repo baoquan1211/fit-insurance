@@ -1,8 +1,9 @@
 export type SpinnerProps = {
   size?: number;
+  hasLogo?: boolean;
 };
 
-function Spinner({ size = 16 }: SpinnerProps) {
+function Spinner({ size = 16, hasLogo = true }: SpinnerProps) {
   return (
     <div className="relative">
       <svg
@@ -25,11 +26,13 @@ function Spinner({ size = 16 }: SpinnerProps) {
           fill="currentFill"
         />
       </svg>
-      <img
-        src="/logo.svg"
-        alt="fit"
-        className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2"
-      />
+      {hasLogo && (
+        <img
+          src="/logo.svg"
+          alt="fit"
+          className="absolute left-1/2 top-1/2 size-7 -translate-x-1/2 -translate-y-1/2"
+        />
+      )}
     </div>
   );
 }

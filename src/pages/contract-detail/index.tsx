@@ -69,11 +69,11 @@ function ContractDetailPage() {
   if (contract) {
     return (
       <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-gray-100 px-3 py-6 md:py-16">
-        <section>
+        <section className="w-full md:w-auto">
           <h1 className="mb-4 w-fit self-start text-2xl font-semibold">
             Thông tin hợp đồng
           </h1>
-          <div className="flex flex-col gap-1 md:gap-6 lg:flex-row">
+          <div className="flex w-full flex-col gap-1 md:gap-6 lg:flex-row">
             <div className="flex w-fit flex-col gap-6">
               <div className="flex max-w-3xl flex-col gap-4 rounded-lg bg-background p-6">
                 <h2 className="text-xl font-semibold">Sản phẩm bảo hiểm</h2>
@@ -173,7 +173,7 @@ function ContractDetailPage() {
             contractStatus === ContractStatus.INITIAL ? (
               <PaymentContractBox contract={contract} />
             ) : contractStatus === ContractStatus.ACTIVE ? (
-              <ActiveContractBox />
+              <ActiveContractBox contractId={contract?.id} />
             ) : (
               <ExpiredContractBox />
             )}

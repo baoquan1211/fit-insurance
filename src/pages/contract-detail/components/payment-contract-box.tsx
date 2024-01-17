@@ -13,21 +13,27 @@ import {
 } from "@/components/ui/dialog";
 import useFetchPaymentUrl from "../hooks/useGetPaymentUrl";
 import { ContractStatus, handleStatusContract } from "..";
+import { useToast } from "@/components/ui/use-toast";
 
 type PaymentContractBoxProps = {
   contract: Contract;
 };
 
 function PaymentContractBox({ contract }: PaymentContractBoxProps) {
-  const { mutateAsync } = useFetchPaymentUrl();
-
+  const { mutateAsync, isPending } = useFetchPaymentUrl();
+  const { toast } = useToast();
   const handlePayment = async () => {
     try {
-      const url = await mutateAsync({ contractId: contract?.id });
-      console.log(url);
-      if (url) window.location.href = url;
+      if (!isPending) {
+        const url = await mutateAsync({ contractId: contract?.id });
+        if (url) window.location.href = url;
+      }
     } catch (e) {
-      console.log(e);
+      toast({
+        variant: "destructive",
+        title: "Có lỗi xảy ra!",
+        description: "Vui lòng thử lại sau!",
+      });
     }
   };
   return (

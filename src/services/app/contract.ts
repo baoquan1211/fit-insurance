@@ -1,4 +1,4 @@
-import { ContractCreation } from "@/pages/insured-person";
+import { ContractCreation } from "@/pages/insured-register";
 import axios, { ApiResponse } from "@/services";
 import { type User } from "./user";
 import { type Insurance } from "./insurance";

@@ -6,17 +6,32 @@ import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import useRegister from "./hooks/useRegister";
 import { ErrorResponse, SuccessResponse } from "@/services";
+import LoadingPage from "@/components/loading-page";
 
 const registerSchema = z
   .object({
-    name: z.string(),
+    name: z
+      .string()
+      .regex(/^[A-Z\s]+$/, "Tên in hoa không chứa dấu hay ký tự đặc biệt"),
     email: z.string().email({ message: "Email không hợp lệ" }),
-    password: z.string().min(6, {
-      message: "Mật khẩu phải tối thiếu 6 ký tự",
-    }),
-    confirmPassword: z.string().min(6, {
-      message: "Mật khẩu phải tối thiếu 6 ký tự",
-    }),
+    password: z
+      .string()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+        "Mật khẩu phải chứa ký tự hoa, ký tự thường và số",
+      )
+      .min(6, {
+        message: "Mật khẩu phải tối thiếu 6 ký tự",
+      }),
+    confirmPassword: z
+      .string()
+      .regex(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
+        "Mật khẩu chứa ít nhất một ký tự hoa và một ký tự thường",
+      )
+      .min(6, {
+        message: "Mật khẩu phải tối thiếu 6 ký tự",
+      }),
   })
   .refine((val) => val.password == val.confirmPassword, {
     message: "Xác nhận lại mật khẩu không trùng khớp",
@@ -41,7 +56,7 @@ function RegisterPage() {
     ) {
       registerSchema
         .parseAsync({
-          name: nameRef.current.value as string,
+          name: nameRef.current.value.toUpperCase() as string,
           email: emailRef.current.value as string,
           password: passwordRef.current.value as string,
           confirmPassword: confirmPasswordRef.current.value as string,
@@ -87,6 +102,7 @@ function RegisterPage() {
       onSubmit={loginHandle}
       className="flex h-[calc(100dvh-72px)] justify-center bg-gray-100 py-16"
     >
+      {isPending ? <LoadingPage isLayout={true} /> : null}
       <section className="flex h-fit flex-col gap-1 rounded-xl bg-background p-12 md:min-w-[500px]">
         <h2 className="text-xl font-semibold">Đăng ký tài khoản</h2>
         <h3 className="text-sm">
@@ -98,6 +114,7 @@ function RegisterPage() {
             label="Họ và tên"
             name={"name"}
             inputRef={nameRef}
+            className="uppercase"
           />
           <InputField
             placeholder="Email"
