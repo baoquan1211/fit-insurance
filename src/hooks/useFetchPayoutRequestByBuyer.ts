@@ -1,12 +1,12 @@
-import { findByEmail } from "@/services/app/contract";
+import { findByEmail } from "@/services/app/payout-request";
 import { useQuery } from "@tanstack/react-query";
 
-function useFetchContractByBuyer(
+function useFetchPayoutRequestByBuyer(
   email: string,
-  status: "active" | "incomplete" | "expired" | "all",
+  status: "pending" | "accepted" | "rejected" | "all" = "all",
 ) {
   return useQuery({
-    queryKey: ["contracts-by-buyer", email, status],
+    queryKey: ["payout-by-buyer", email, status],
     queryFn: async () => {
       const response = await findByEmail(email, status);
       if (response.status >= 400) throw new Error(response.message);
@@ -16,4 +16,4 @@ function useFetchContractByBuyer(
   });
 }
 
-export default useFetchContractByBuyer;
+export default useFetchPayoutRequestByBuyer;

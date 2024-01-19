@@ -41,7 +41,7 @@ export function handleStatusContract(contract: Contract) {
   }
   if (contract?.status === "INITIAL") return ContractStatus.INITIAL;
   if (contract?.status === "ACTIVE") return ContractStatus.ACTIVE;
-  if (contract?.status === "EXPIRED") return ContractStatus.EXPIRED;
+  return ContractStatus.EXPIRED;
 }
 
 const insuredPersonInfo: InsuredPersonInfo[] = [

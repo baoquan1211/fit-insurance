@@ -25,6 +25,15 @@ const ContractDetailPage = React.lazy(() => import("./pages/contract-detail"));
 const ContractManagePage = React.lazy(() => import("./pages/contract-manage"));
 const PayoutRequestPage = React.lazy(() => import("./pages/payout-request"));
 
+// User Detail Page
+const UserDetailPage = React.lazy(() => import("./pages/user-detail"));
+const UserInformation = React.lazy(
+  () => import("./pages/user-detail/components/user-informations"),
+);
+const UserChangePassword = React.lazy(
+  () => import("./pages/user-detail/components/user-change-password"),
+);
+
 const queryClient = new QueryClient();
 
 function App() {
@@ -67,6 +76,13 @@ function App() {
                     <Route element={<FooterLayout />}>
                       <Route path="" element={<HomePage />} />
                       <Route path="baohiem/:slug" element={<InsurancePage />} />
+                      <Route path="/nguoi-dung" element={<UserDetailPage />}>
+                        <Route path="" element={<UserInformation />} />
+                        <Route
+                          path="doi-mat-khau"
+                          element={<UserChangePassword />}
+                        />
+                      </Route>
                     </Route>
                     <Route path="*" element={<ErrorPage />} />
                   </Route>

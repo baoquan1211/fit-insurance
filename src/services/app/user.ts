@@ -5,6 +5,7 @@ export type User = {
   phone?: string;
   identityCard?: string;
   email: string;
+  avatarUrl?: string;
 };
 
 export const getUserByEmail = async (email: string) => {

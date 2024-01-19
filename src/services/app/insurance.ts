@@ -6,17 +6,9 @@ export interface Insurance extends Record<string, any> {
   id: number;
   insuranceTypeId: number;
   name: string;
-  description: string;
-  minFeePerYear: number;
   logo: string;
-  detail: string;
   totalPayPerYear: number;
-  inpatientFeePayPerDay: number;
-  healthCheckFeePayBeforeInpatientPerYear: number;
-  healthCheckFeePayAfterInpatientPerYear: number;
-  surgicalFeePayPerYear: number;
-  medicalVehicleFeePayPerYear: number;
-  functionalRestorationPayPerYear: number;
+  minFeePerYear: number;
   benefits: Benefit[];
 }
 

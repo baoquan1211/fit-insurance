@@ -1,4 +1,4 @@
-import UserAvatar from "./user-avatar";
+import UserAvatar from "@/components/user-avatar";
 import { ChevronDown } from "lucide-react";
 import {
   Popover,

@@ -9,7 +9,7 @@ export interface LoginSuccess {
   access: string;
 }
 
-const login = async (data: LoginResquest) => {
+export const login = async (data: LoginResquest) => {
   const response: ApiResponse<LoginSuccess> = await axios.post("/login", data);
   return response;
 };
@@ -18,13 +18,13 @@ export interface RefreshTokenSuccess {
   access: string;
 }
 
-const refresh = async () => {
+export const refresh = async () => {
   const response: ApiResponse<RefreshTokenSuccess> =
     await axios.get("/refresh");
   return response;
 };
 
-const logout = () => {
+export const logout = () => {
   return axios.get("/logout");
 };
 
@@ -34,9 +34,21 @@ export interface RegisterResquest {
   password: string;
 }
 
-const register = async (data: RegisterResquest) => {
+export const register = async (data: RegisterResquest) => {
   const response: ApiResponse<unknown> = await axios.post("/register", data);
   return response;
 };
 
-export { login, refresh, logout, register };
+export interface ChangePasswordResquest {
+  email: string;
+  password: string;
+  newPassword: string;
+}
+
+export const changePassword = async (data: ChangePasswordResquest) => {
+  const response: ApiResponse<unknown> = await axios.patch(
+    "/change-password",
+    data,
+  );
+  return response;
+};

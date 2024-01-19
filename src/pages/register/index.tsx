@@ -46,7 +46,7 @@ function RegisterPage() {
   const { mutateAsync, isPending } = useRegister();
   const { toast } = useToast();
 
-  const loginHandle = (event: React.FormEvent<HTMLElement>) => {
+  const handleLogin = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
     if (
       emailRef.current &&
@@ -78,6 +78,7 @@ function RegisterPage() {
                 }
                 if (res.status === 201) {
                   toast({
+                    variant: "success",
                     title: "Đăng ký thành công",
                     description: "Vui lòng tiến hành đăng nhập",
                   });
@@ -99,7 +100,7 @@ function RegisterPage() {
 
   return (
     <main
-      onSubmit={loginHandle}
+      onSubmit={handleLogin}
       className="flex h-[calc(100dvh-72px)] justify-center bg-gray-100 py-16"
     >
       {isPending ? <LoadingPage isLayout={true} /> : null}
@@ -114,7 +115,7 @@ function RegisterPage() {
             label="Họ và tên"
             name={"name"}
             inputRef={nameRef}
-            className="uppercase"
+            className="uppercase placeholder:normal-case"
           />
           <InputField
             placeholder="Email"
