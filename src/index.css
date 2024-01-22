@@ -27,6 +27,10 @@ body,
   height: 8px;
 }
 
+::-webkit-file-upload-button {
+  cursor: pointer;
+}
+
 @media (max-width: 640px) {
   ::-webkit-scrollbar {
     height: 3px;

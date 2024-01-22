@@ -33,6 +33,9 @@ const UserInformation = React.lazy(
 const UserChangePassword = React.lazy(
   () => import("./pages/user-detail/components/user-change-password"),
 );
+const UserChangeInformation = React.lazy(
+  () => import("./pages/user-detail/components/user-change-informations"),
+);
 
 const queryClient = new QueryClient();
 
@@ -81,6 +84,10 @@ function App() {
                         <Route
                           path="doi-mat-khau"
                           element={<UserChangePassword />}
+                        />
+                        <Route
+                          path="chinh-sua"
+                          element={<UserChangeInformation />}
                         />
                       </Route>
                     </Route>

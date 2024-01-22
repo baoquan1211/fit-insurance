@@ -27,7 +27,7 @@ function RootLayout() {
       ) &&
       location.pathname != "/"
     ) {
-      if (auth.access && auth.status == "success") return;
+      if (auth.access) return;
       navigate("/login");
     }
   });

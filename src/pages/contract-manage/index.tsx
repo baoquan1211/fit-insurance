@@ -1,10 +1,9 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "react-router-dom";
 import ContractList from "./components/contract-list";
 import { useAppSelector } from "@/hooks/redux.hook";
-
-const Spinner = React.lazy(() => import("@/components/ui/spinner"));
+import Spinner from "@/components/ui/spinner";
 
 type TabType = {
   tab: string;

@@ -49,9 +49,8 @@ function ChangePassword() {
   const confirmNewPasswordRef = useRef<HTMLInputElement>(null);
   const { mutateAsync, isPending } = useChangePassword();
   const { toast } = useToast();
-  const handleChangePassword = (event: React.FormEvent<HTMLElement>) => {
+  const handleChangePassword = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (
       passwordRef.current &&
       newPasswordRef.current &&
@@ -68,7 +67,7 @@ function ChangePassword() {
           if (!isPending)
             mutateAsync({
               email: data.email,
-              password: data.password,
+              lastPassword: data.password,
               newPassword: data.newPassword,
             })
               .then(() => {

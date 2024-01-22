@@ -55,8 +55,6 @@ const authSlice = createSlice({
     builder.addCase(refreshAction.pending, (state) => {
       console.log("INFO: Refreshing token");
       state.status = "loading";
-      state.access = null;
-      state.message = null;
     });
     builder.addCase(refreshAction.fulfilled, (state, action) => {
       console.log("INFO: Refreshing token successfully");

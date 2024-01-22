@@ -6,7 +6,7 @@ function useUser() {
   const auth = useAppSelector((state) => state.auth);
   const email = auth.email;
   return useSuspenseQuery({
-    queryKey: ["users", email],
+    queryKey: ["user", email],
     queryFn: async () => {
       const response = await getUserByEmail(email as string);
       if (response.status >= 400) throw new Error(response.message);

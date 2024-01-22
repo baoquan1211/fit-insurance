@@ -2,15 +2,22 @@ import UserAvatar from "@/components/user-avatar";
 import useUser from "@/hooks/useUser";
 import UserContracts from "./user-contracts";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 function UserInformation() {
   const { data: user } = useUser();
+  const navigate = useNavigate();
 
   return (
     <div className="flex w-full flex-col">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Thông tin cá nhân</h1>
-        <Button variant={"outline"}>Chỉnh sửa</Button>
+        <Button
+          variant={"outline"}
+          onClick={() => navigate("/nguoi-dung/chinh-sua")}
+        >
+          Chỉnh sửa
+        </Button>
       </div>
       <div className="mt-2 flex flex-col gap-4 lg:flex-row">
         <div className="flex gap-3 rounded-lg bg-background p-6">

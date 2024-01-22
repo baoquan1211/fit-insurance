@@ -53,8 +53,7 @@ instance.interceptors.response.use(
       config.url !== "/refresh" &&
       config.url !== "/login" &&
       config.url !== "/logout" &&
-      config.url !== "/register" &&
-      config.url !== "/change-password"
+      config.url !== "/register"
     ) {
       {
         useRefresh();
@@ -63,7 +62,6 @@ instance.interceptors.response.use(
       if (config.url === "/refresh") {
         useLogout();
       }
-
       const response: ErrorResponse = {
         message: error.response.data.error,
         status: error.response.status,

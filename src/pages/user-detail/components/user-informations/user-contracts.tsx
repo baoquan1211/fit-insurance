@@ -13,7 +13,7 @@ function UserContracts() {
 
   const totalContracts = contracts?.length;
   const activeContracts = contracts?.filter(
-    (contract) => contract.status === "active",
+    (contract) => contract.status === "ACTIVE",
   ).length;
   const unpaidContracts = contracts?.filter(
     (contract) =>

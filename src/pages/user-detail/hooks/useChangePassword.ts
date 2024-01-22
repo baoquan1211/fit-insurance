@@ -6,8 +6,7 @@ function useChangePassword() {
     mutationKey: ["change-password"],
     mutationFn: async (data: ChangePasswordResquest) => {
       const response = await changePassword(data);
-      if (response.status >= 400 && response.message)
-        throw new Error(response.message);
+      if (response.status >= 400) return Promise.reject(response.message);
       return response.data;
     },
   });

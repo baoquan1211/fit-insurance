@@ -41,7 +41,7 @@ export const register = async (data: RegisterResquest) => {
 
 export interface ChangePasswordResquest {
   email: string;
-  password: string;
+  lastPassword: string;
   newPassword: string;
 }
 
