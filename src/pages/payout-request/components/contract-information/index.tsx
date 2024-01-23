@@ -12,7 +12,7 @@ function ContractInformantion({
   insurance,
 }: ContractInformantionProps) {
   return (
-    <div className="flex max-w-3xl flex-col gap-4 rounded-lg bg-background p-6">
+    <div className="flex w-full flex-col gap-4 rounded-lg bg-background p-6">
       <h2 className="text-xl font-semibold">Thông tin hợp đồng</h2>
       <div className="flex items-center gap-12 rounded-md border-[1px] border-gray-100 p-3">
         <span className="text-sm font-medium text-slate-500">

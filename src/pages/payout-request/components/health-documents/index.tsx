@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useToast } from "@/components/ui/use-toast";
 
 type Document = {
   name: string;
@@ -33,6 +34,8 @@ function HealthDocuments({
 }: {
   healthDocuments: Signal<File[]>;
 }) {
+  const { toast } = useToast();
+
   return (
     <div className="flex max-w-3xl flex-col gap-4 rounded-lg bg-background p-6">
       <div>
@@ -73,12 +76,24 @@ function HealthDocuments({
           label="Giấy tờ sức khỏe liên quan"
           type="file"
           accept="image/*"
+          className="cursor-pointer"
           onChange={(event) => {
-            if (event.target.files !== null)
+            if (event.target.files !== null) {
+              for (let i = 0; i < event.target.files.length; i++) {
+                if (event.target.files[i].size > 1024 * 1024 * 10) {
+                  toast({
+                    variant: "destructive",
+                    title: "Có lỗi xảy ra!",
+                    description: "Kích thước file không được vượt quá 10MB",
+                  });
+                  return;
+                }
+              }
               healthDocuments.value = [
                 ...healthDocuments.value,
                 ...event.target.files,
               ];
+            }
           }}
           multiple
           placeholder="Chọn tệp tin"

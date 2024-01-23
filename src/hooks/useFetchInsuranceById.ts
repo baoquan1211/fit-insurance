@@ -1,8 +1,8 @@
 import { findById } from "@/services/app/insurance";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 function useFetchInsuranceById(id: number) {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: ["insurances", id],
     queryFn: async () => {
       const response = await findById(id);
@@ -11,6 +11,7 @@ function useFetchInsuranceById(id: number) {
       }
       if (response.data) return response.data;
     },
+    enabled: !!id,
     staleTime: Infinity,
   });
 }

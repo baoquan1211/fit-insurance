@@ -11,6 +11,7 @@ function useFetchInsuranceTypeById(id: number) {
       }
       if (response.data) return response.data;
     },
+    enabled: !!id,
     staleTime: Infinity,
   });
 }

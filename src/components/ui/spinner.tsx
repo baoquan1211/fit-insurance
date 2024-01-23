@@ -5,7 +5,7 @@ export type SpinnerProps = {
 
 function Spinner({ size = 16, hasLogo = true }: SpinnerProps) {
   return (
-    <div className="relative">
+    <div className="relative w-fit">
       <svg
         aria-hidden="true"
         className="animate-spin rounded-md fill-primary text-gray-200 ease-in-out dark:text-gray-600"

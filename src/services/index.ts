@@ -1,4 +1,4 @@
-import { useAuth, useLogout, useRefresh } from "@/hooks/auth.hook";
+import { useAuth, useRefresh } from "@/hooks/auth.hook";
 import axios, { AxiosResponse } from "axios";
 
 const instance = axios.create({
@@ -17,6 +17,13 @@ export type SuccessResponse<T> = {
 export type ErrorResponse = {
   message?: string;
   status: number;
+};
+
+export type PageableResponse<T> = {
+  page: number;
+  size: number;
+  total: number;
+  content: T[];
 };
 
 export type ApiResponse<T> = SuccessResponse<T> & ErrorResponse;
@@ -59,9 +66,6 @@ instance.interceptors.response.use(
         useRefresh();
       }
     } else {
-      if (config.url === "/refresh") {
-        useLogout();
-      }
       const response: ErrorResponse = {
         message: error.response.data.error,
         status: error.response.status,

@@ -6,6 +6,7 @@ import { ZodError, z } from "zod";
 import useChangePassword from "../../hooks/useChangePassword";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
+import LoadingPage from "@/components/loading-page";
 
 const changePasswordSchema = z
   .object({
@@ -99,6 +100,7 @@ function ChangePassword() {
 
   return (
     <div className="w-full">
+      {isPending ? <LoadingPage isLayout={true} /> : null}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Thay đổi mật khẩu</h1>
       </div>

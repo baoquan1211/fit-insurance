@@ -1,7 +1,7 @@
-import axios, { ApiResponse } from "@/services";
+import axios, { ApiResponse, PageableResponse } from "@/services";
 import { Benefit } from "./insurance-benefit";
 
-type HealthDocument = {
+export type HealthDocument = {
   name: string;
   url: string;
 };
@@ -9,10 +9,11 @@ type HealthDocument = {
 export type PayoutRequest = {
   id: number;
   createdAt: string;
-  status: string;
+  status: "PENDING" | "ACCEPTED" | "REJECTED";
   benefits: Benefit[];
   contractId: number;
   totalPay: number;
+  message: string;
   documents: HealthDocument[];
 };
 
@@ -32,7 +33,7 @@ export const create = async (data: PayoutRequestCreation) => {
   );
   data.files.forEach((file) => formData.append("files", file));
   const response: ApiResponse<PayoutRequest> = await axios.post(
-    "/payout-request",
+    "/payout-requests",
     formData,
   );
   return response;
@@ -43,7 +44,30 @@ export const findByEmail = async (
   status: "pending" | "accepted" | "rejected" | "all" = "all",
 ) => {
   const response: ApiResponse<PayoutRequest[]> = await axios.get(
-    `/payout-request?email=${email}&status=${status}`,
+    `/payout-requests/email/${email}?status=${status}`,
+  );
+  return response;
+};
+
+export const findAll = async (page: number, size: number) => {
+  const response: ApiResponse<PageableResponse<PayoutRequest>> =
+    await axios.get(`/payout-requests?page=${page}&limit=${size}`);
+  return response;
+};
+
+export type PayoutRequestUpdate = {
+  id: number;
+  status: "accepted" | "rejected";
+  message?: string;
+};
+
+export const updateStatus = async (data: PayoutRequestUpdate) => {
+  const response: ApiResponse<unknown> = await axios.patch(
+    `/payout-requests/${data.id}`,
+    {
+      status: data.status,
+      message: data.message,
+    },
   );
   return response;
 };

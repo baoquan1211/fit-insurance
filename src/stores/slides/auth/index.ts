@@ -64,7 +64,7 @@ const authSlice = createSlice({
     builder.addCase(refreshAction.rejected, (state) => {
       console.log("ERROR: Refreshing token failed");
       state.access = null;
-      state.message = null;
+      state.message = "Token expired or invalid";
       state.status = "error";
       state.email = null;
     });

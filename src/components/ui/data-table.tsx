@@ -1,8 +1,12 @@
+import React from "react";
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
+  getPaginationRowModel,
+  SortingState,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 
 import {
@@ -13,24 +17,34 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DataTablePagination } from "./data-table-pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  hasPagination?: boolean;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  hasPagination = false,
 }: DataTableProps<TData, TValue>) {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
 
   return (
-    <div className="rounded-md border">
+    <div className="flex flex-col rounded-md border">
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -73,6 +87,11 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+      {hasPagination && (
+        <div className="space-y-2.5 self-end">
+          <DataTablePagination table={table} />
+        </div>
+      )}
     </div>
   );
 }

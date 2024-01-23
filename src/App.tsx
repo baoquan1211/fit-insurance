@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoadingPage from "./components/loading-page";
 import ErrorPage from "./components/error-page";
 import FooterLayout from "./layouts/footer-layout";
+import AdminLayout from "./layouts/admin";
 
 const HomePage = React.lazy(() => import("./pages/home"));
 const LoginPage = React.lazy(() => import("./pages/login"));
@@ -35,6 +36,12 @@ const UserChangePassword = React.lazy(
 );
 const UserChangeInformation = React.lazy(
   () => import("./pages/user-detail/components/user-change-informations"),
+);
+
+// Admin Page
+const AdminPage = React.lazy(() => import("./pages/admin"));
+const AdminPayoutRequestPage = React.lazy(
+  () => import("./pages/admin/payout-request"),
 );
 
 const queryClient = new QueryClient();
@@ -75,6 +82,13 @@ function App() {
                       path="/yeu-cau-thanh-toan"
                       element={<PayoutRequestPage />}
                     />
+                    <Route path="/admin" element={<AdminLayout />}>
+                      <Route path="" element={<AdminPage />} />
+                      <Route
+                        path="yeu-cau-thanh-toan"
+                        element={<AdminPayoutRequestPage />}
+                      />
+                    </Route>
                     // Co footer
                     <Route element={<FooterLayout />}>
                       <Route path="" element={<HomePage />} />

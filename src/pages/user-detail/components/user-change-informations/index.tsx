@@ -9,6 +9,7 @@ import useUpdateUserInfo from "../../hooks/useUpdateUserInfo";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
+import LoadingPage from "@/components/loading-page";
 
 function UserChangeInformation() {
   const { data: user } = useUser();
@@ -50,6 +51,7 @@ function UserChangeInformation() {
 
   return (
     <div className="w-full">
+      {isPending ? <LoadingPage isLayout={true} /> : null}
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Thay đổi mật khẩu</h1>
       </div>
