@@ -101,7 +101,7 @@ function RegisterPage() {
   return (
     <main
       onSubmit={handleLogin}
-      className="flex h-[calc(100dvh-72px)] justify-center bg-gray-100 py-16"
+      className="flex h-[calc(100dvh-72px)] justify-center bg-muted py-16"
     >
       {isPending ? <LoadingPage isLayout={true} /> : null}
       <section className="flex h-fit flex-col gap-1 rounded-xl bg-background p-12 md:min-w-[500px]">

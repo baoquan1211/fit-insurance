@@ -1,12 +1,11 @@
+import Spinner from "@/components/ui/spinner";
 import useFetchContractById from "@/hooks/useFetchContractById";
 import useFetchInsuranceById from "@/hooks/useFetchInsuranceById";
+import InsuredPersonInfo from "@/pages/contract-detail/components/insured-person-info";
 import ContractInformantion from "@/pages/payout-request/components/contract-information";
 import { PayoutRequest } from "@/services/app/payout-request";
-import BenefitTable from "../../../../../components/benefit-table";
-import HealthDocumentShow from "./health-document-show";
-import InsuredPersonInfo from "@/pages/contract-detail/components/insured-person-info";
-import UpdateStatusForm from "./update-status-form";
-import Spinner from "@/components/ui/spinner";
+import PayoutRequestStatus from "./payout-request-status";
+import BenefitTable from "@/components/benefit-table";
 
 type PayoutRequestDetailProps = {
   contractId: number;
@@ -32,14 +31,9 @@ function PayoutRequestDetail({
   return (
     <>
       <ContractInformantion contract={contract} insurance={insurance} />
-
       <InsuredPersonInfo contract={contract} />
-
+      <PayoutRequestStatus request={request} />
       <BenefitTable benefits={request?.benefits} />
-
-      <HealthDocumentShow documents={request?.documents} />
-
-      <UpdateStatusForm requestId={request?.id} />
     </>
   );
 }

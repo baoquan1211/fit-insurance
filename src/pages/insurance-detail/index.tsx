@@ -52,7 +52,7 @@ function InsuranceDetailPage() {
               </Button>
             </div>
           </div>
-          <div className="bg-gray-100 p-4 font-[600]">
+          <div className="bg-muted p-4 font-[600]">
             Tổng hạn mức chi trả{" "}
             <span className="text-xs font-[500] text-gray-600">
               (Số tiền/năm)
@@ -65,7 +65,7 @@ function InsuranceDetailPage() {
             .sort((a, b) => a.amount - b.amount)
             .map((benifit, index) => (
               <React.Fragment key={index}>
-                <div className="bg-gray-100 p-4 font-[600]">
+                <div className="bg-muted p-4 font-[600]">
                   {benifit?.name}{" "}
                   <span className="text-xs font-[500] text-gray-600">
                     ({benifit?.unit})

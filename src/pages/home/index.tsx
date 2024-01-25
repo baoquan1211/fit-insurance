@@ -4,7 +4,7 @@ import ProductShow from "./components/product-show";
 
 export default function HomePage() {
   return (
-    <main className="w-full bg-gray-100">
+    <main className="w-full bg-muted">
       <BannerCarousel />
       <ProductShow />
       <Instruction />

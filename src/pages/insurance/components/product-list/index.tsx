@@ -5,7 +5,7 @@ import { Insurance } from "@/services/app/insurance";
 function ProductList({ insurances }: { insurances: Insurance[] }) {
   return (
     <section
-      className="flex flex-col items-center justify-center bg-gray-100 px-6 py-14"
+      className="flex flex-col items-center justify-center bg-muted px-6 py-14"
       id="insurances"
     >
       <div className="w-[95dvw] xl:w-[1048px]">

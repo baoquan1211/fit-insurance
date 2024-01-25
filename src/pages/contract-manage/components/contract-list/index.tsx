@@ -3,6 +3,7 @@ import ContractCard from "../contract-card";
 import { useAppSelector } from "@/hooks/redux.hook";
 import React from "react";
 import EmptyList from "./empty-list";
+import LoadingPage from "@/components/loading-page";
 
 function ContractList({
   status,
@@ -10,12 +11,16 @@ function ContractList({
   status: "active" | "incomplete" | "expired";
 }) {
   const user = useAppSelector((state) => state.auth);
-  const { data: contracts } = useFetchContractByBuyer(
+  const { data: contracts, isLoading } = useFetchContractByBuyer(
     user?.email as string,
     status,
   );
+
+  console.log(isLoading);
+
   return (
     <>
+      {isLoading && <LoadingPage isLayout />}
       {contracts?.length === 0 ? (
         <div className="mt-8 w-full">
           <EmptyList />

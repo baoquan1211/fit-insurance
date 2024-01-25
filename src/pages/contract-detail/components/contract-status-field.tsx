@@ -12,7 +12,7 @@ function ContractStatusField({ contract, status }: ContractStatusProps) {
   const ContractStatusFieldInfo = {
     [ContractStatus.INITIAL]: {
       style: "border-primary bg-primary/5 text-primary",
-      label: "Hợp đồng  đang được khởi tạo",
+      label: "Hợp đồng đang được khởi tạo",
     },
     [ContractStatus.WAIT_FOR_PAYMENT]: {
       style: "border-primary bg-primary/5 text-primary",

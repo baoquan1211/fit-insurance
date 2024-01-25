@@ -37,6 +37,9 @@ const UserChangePassword = React.lazy(
 const UserChangeInformation = React.lazy(
   () => import("./pages/user-detail/components/user-change-informations"),
 );
+const UserPayoutRequestList = React.lazy(
+  () => import("./pages/user-detail/components/user-payout-request-list"),
+);
 
 // Admin Page
 const AdminPage = React.lazy(() => import("./pages/admin"));
@@ -102,6 +105,10 @@ function App() {
                         <Route
                           path="chinh-sua"
                           element={<UserChangeInformation />}
+                        />
+                        <Route
+                          path="danh-sach-yeu-cau"
+                          element={<UserPayoutRequestList />}
                         />
                       </Route>
                     </Route>

@@ -2,7 +2,6 @@ import { PageableResponse } from "@/services";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -16,10 +15,35 @@ type PaginationTableProps = {
 };
 
 function PaginationTable({ data, pageIndex }: PaginationTableProps) {
+  const MAX_LENGH = 5;
   const listPage: number[] = [];
-  for (let i = 0; i < data.total; i++) {
+  const startPage = Math.max(0, pageIndex.value - 2);
+  const endPage = Math.min(data.total, pageIndex.value + 3);
+  let left = 0;
+  let right = 0;
+
+  if (data.total > MAX_LENGH) {
+    if (endPage - startPage < MAX_LENGH) {
+      if (endPage < MAX_LENGH) {
+        left = 0;
+        right = MAX_LENGH;
+      } else {
+        left = data.total - MAX_LENGH;
+        right = data.total;
+      }
+    } else {
+      left = startPage;
+      right = endPage;
+    }
+  } else {
+    left = 0;
+    right = data.total;
+  }
+
+  for (let i = left; i < right; i++) {
     listPage.push(i);
   }
+
   return (
     <Pagination>
       <PaginationContent>
@@ -43,16 +67,12 @@ function PaginationTable({ data, pageIndex }: PaginationTableProps) {
             </PaginationLink>
           </PaginationItem>
         ))}
-        {listPage.length > 3 && (
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
-        )}
+
         <PaginationItem>
           <PaginationNext
             className="cursor-pointer"
             onClick={() => {
-              if (pageIndex.value === listPage.length - 1) return;
+              if (pageIndex.value === data.total - 1) return;
               pageIndex.value = pageIndex.value + 1;
             }}
           />

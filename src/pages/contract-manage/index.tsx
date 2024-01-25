@@ -1,9 +1,7 @@
-import { Suspense } from "react";
 import { cn } from "@/lib/utils";
 import { useSearchParams } from "react-router-dom";
 import ContractList from "./components/contract-list";
 import { useAppSelector } from "@/hooks/redux.hook";
-import Spinner from "@/components/ui/spinner";
 
 type TabType = {
   tab: string;
@@ -33,13 +31,13 @@ function ContractManagePage() {
   if (auth.access === null) return null;
 
   return (
-    <main className="relative min-h-[calc(100dvh-72px)] w-full bg-gray-100">
+    <main className="relative min-h-[calc(100dvh-72px)] w-full bg-muted">
       <div className="flex justify-center bg-white px-4 pt-6">
         <div className="w-full max-w-5xl">
           <h1 className="mb-4 self-start text-2xl font-semibold">
             Quản lý hợp đồng
           </h1>
-          <div className="flex max-w-full gap-6 overflow-auto lg:gap-16">
+          <div className="flex w-fit max-w-full gap-6 lg:gap-16">
             {tabs.map((tab) => (
               <button
                 key={tab.tab}
@@ -60,23 +58,15 @@ function ContractManagePage() {
         </div>
       </div>
       <div className="flex w-full justify-center p-2 md:p-10">
-        <Suspense
-          fallback={
-            <div className="lg:mt-64flex mt-32 h-full items-center">
-              <Spinner size={96} />
-            </div>
+        <ContractList
+          status={
+            searchParams.get("tab") == "1"
+              ? "active"
+              : searchParams.get("tab") == "2"
+                ? "incomplete"
+                : "expired"
           }
-        >
-          <ContractList
-            status={
-              searchParams.get("tab") == "1"
-                ? "active"
-                : searchParams.get("tab") == "2"
-                  ? "incomplete"
-                  : "expired"
-            }
-          />
-        </Suspense>
+        />
       </div>
     </main>
   );

@@ -5,7 +5,7 @@ function ErrorPage() {
   const location = useLocation();
 
   return (
-    <main className="absolute top-[72px] flex h-[calc(100dvh-72px)] w-screen items-center justify-center bg-gray-100 text-center">
+    <main className="absolute top-[72px] flex h-[calc(100dvh-72px)] w-screen items-center justify-center bg-muted text-center">
       <section className="flex flex-col items-center justify-center gap-4 p-6">
         <img src="/not-found.svg" alt="not-found" />
         {location.pathname !== "/" ? (

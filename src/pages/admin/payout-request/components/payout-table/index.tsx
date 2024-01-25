@@ -1,7 +1,7 @@
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./column";
 import useFetchAllPayoutRequest from "../../hooks/useFetchAllPayoutRequest";
-import PaginationTable from "./pagination";
+import PaginationTable from "@/components/pagination";
 import { signal } from "@preact/signals-react";
 import Spinner from "@/components/ui/spinner";
 
@@ -21,11 +21,13 @@ function PayoutTable() {
           <Spinner size={64} />
         </div>
       )}
-      {requests && <DataTable columns={columns} data={requests?.content} />}
       {requests && (
-        <div className="mt-2">
-          <PaginationTable data={requests} pageIndex={pageIndex} />
-        </div>
+        <>
+          <DataTable columns={columns} data={requests?.content} />
+          <div className="mt-2">
+            <PaginationTable data={requests} pageIndex={pageIndex} />
+          </div>
+        </>
       )}
     </div>
   );

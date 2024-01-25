@@ -76,7 +76,7 @@ function LoginPage() {
   return (
     <main
       onSubmit={loginHandle}
-      className="flex h-[calc(100dvh-72px)] justify-center bg-gray-100 py-16"
+      className="flex h-[calc(100dvh-72px)] justify-center bg-muted py-16"
     >
       <section className="flex h-fit flex-col gap-1 rounded-xl bg-background p-16 md:min-w-[500px]">
         <h2 className="text-xl font-semibold">Đăng nhập</h2>

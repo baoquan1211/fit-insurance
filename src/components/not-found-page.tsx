@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 
 function NotFoundPage() {
   return (
-    <main className="absolute top-[72px] flex h-[calc(100dvh-72px)] w-screen items-center justify-center bg-gray-100 text-center">
+    <main className="absolute top-[72px] flex h-[calc(100dvh-72px)] w-screen items-center justify-center bg-muted text-center">
       <section className="flex flex-col items-center justify-center gap-4 p-6">
         <img src="/not-found.svg" alt="not-found" />
         <h1 className="text-xl font-bold">Không tìm thấy trang này</h1>

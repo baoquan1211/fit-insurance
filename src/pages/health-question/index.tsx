@@ -14,7 +14,7 @@ function HealthQuestionPage() {
   if (insuranceRegistrationState === null) return <ErrorPage />;
 
   return (
-    <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-gray-100 px-3 py-6 md:py-16">
+    <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-muted px-3 py-6 md:py-16">
       <section>
         <h1 className="mb-4 self-start text-2xl font-semibold">
           Câu hỏi sức khỏe

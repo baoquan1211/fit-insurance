@@ -1,5 +1,5 @@
 import { DataTable } from "@/components/ui/data-table";
-import { columns } from "./benifit-column";
+import { columns } from "../pages/admin/payout-request/components/payout-request-detail/benifit-column";
 import { type Benefit } from "@/services/app/insurance-benefit";
 
 type BenefitTableProps = {

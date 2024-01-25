@@ -12,6 +12,7 @@ import useCreatePayoutRequest from "./hooks/useCreatePayoutRequest";
 import { PayoutRequestCreation } from "@/services/app/payout-request";
 import LoadingPage from "@/components/loading-page";
 import SubmitBox from "./components/submit-box";
+import { useQueryClient } from "@tanstack/react-query";
 
 const payoutRequestStateSchema = z.object({
   contractId: z.number(),
@@ -44,6 +45,7 @@ function PayoutRequestPage() {
   const auth = useAppSelector((state) => state.auth);
   const { toast } = useToast();
   const { mutateAsync, isPending } = useCreatePayoutRequest();
+  const queryClient = useQueryClient();
 
   const sumbitHandle = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
@@ -77,6 +79,9 @@ function PayoutRequestPage() {
                   title: "Thành công",
                   description: "Gửi yêu cầu bồi thường thành công",
                 });
+                queryClient.invalidateQueries({
+                  queryKey: ["payout-by-buyer", auth.email, "all"],
+                });
                 navigate(`/hopdong/chi-tiet/${contract?.id}`);
               }
             })
@@ -100,7 +105,7 @@ function PayoutRequestPage() {
   };
   if (contract)
     return (
-      <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-gray-100 px-3 py-6 md:py-16">
+      <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-muted px-3 py-6 md:py-16">
         {isPending ? <LoadingPage isLayout={true} /> : null}
         <section className="w-full md:w-auto">
           <h1 className="mb-4 w-fit self-start text-2xl font-semibold">

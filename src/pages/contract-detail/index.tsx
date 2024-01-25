@@ -55,7 +55,7 @@ function ContractDetailPage() {
 
   if (contract) {
     return (
-      <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-gray-100 px-3 py-6 md:py-16">
+      <main className="relative flex min-h-[calc(100dvh-72px)] w-full flex-col items-center bg-muted px-3 py-6 md:py-16">
         {isLoading && <LoadingPage />}
         <section className="w-full md:w-auto">
           <h1 className="mb-4 w-fit self-start text-2xl font-semibold">

@@ -123,7 +123,7 @@ function UpdateStatusForm({ requestId }: UpdateStatusFormProps) {
         </label>
       </div>
 
-      <DialogFooter className="flex" id={modalId}>
+      <DialogFooter className="gap-3" id={modalId}>
         <Button onClick={() => handleAccept()} size={"lg"}>
           Duyệt
         </Button>
